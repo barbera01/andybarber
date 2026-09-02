@@ -22,8 +22,8 @@
             <dl class="idcard__row"><dt>role</dt><dd>Senior Site Reliability Engineer</dd></dl>
             <dl class="idcard__row"><dt>uptime</dt><dd><b>20 yrs</b> in infrastructure</dd></dl>
             <dl class="idcard__row"><dt>azure</dt><dd><b>10 yrs</b>, AKS &middot; Terraform &middot; landing zones</dd></dl>
-            <dl class="idcard__row"><dt>also</dt><dd>Applied AI &mdash; RAG, computer vision, document intelligence</dd></dl>
-            <dl class="idcard__row"><dt>pager</dt><dd>quiet</dd></dl>
+            <dl class="idcard__row"><dt>ai</dt><dd>RAG &middot; vector search &middot; computer vision &middot; document intelligence</dd></dl>
+            <dl class="idcard__row"><dt>status</dt><dd>open to new work</dd></dl>
           </div>
         </div>
 
@@ -36,45 +36,64 @@
       </div>
 
       <div class="splash__side">
-      <!-- The signature: the on-call week, live against the reader's clock.
-           128 of the 168 hours fall outside 09-17 Mon-Fri. -->
-      <aside class="rota-box" data-rota data-reveal style="--reveal-delay: 120ms">
-        <div class="rota-box__head">
-          <span class="rota__clock">on-call week</span>
-          <span class="rota-box__state"></span>
+      <!-- The signature. The artifact of the trade is an architecture
+           diagram, so that is what the panel shows: the shape of the
+           platforms he designs and runs. Every node comes from _data —
+           skills.yml for the tooling, experience.yml for the numbers. -->
+      <aside class="arch" data-reveal style="--reveal-delay: 120ms">
+        <div class="arch__head">
+          <span>platform</span>
+          <span class="arch__head-meta">what i build</span>
         </div>
 
-        <div class="rota-box__body">
-          <p class="visually-hidden">
-            A week as 168 hourly cells. The 40 hours from 09:00 to 17:00, Monday to
-            Friday, are working hours; the remaining 128 are out of hours.
-          </p>
-
-          <div class="rota" aria-hidden="true">
-            {%- assign initials = "M,T,W,T,F,S,S" | split: "," -%}
-            {%- for d in (0..6) -%}
-              <span class="rota__day">{{ initials[d] }}</span>
-              {%- for h in (0..23) -%}
-                {%- assign out = false -%}
-                {%- if d >= 5 or h < 9 or h >= 17 -%}{%- assign out = true -%}{%- endif -%}
-                <span class="rota__cell{% if out %} is-out{% endif %}" data-d="{{ d }}" data-h="{{ h }}"></span>
-              {%- endfor -%}
-            {%- endfor -%}
+        <div class="arch__body">
+          <div class="arch__node arch__node--iac">
+            <p class="arch__name">terraform</p>
+            <p class="arch__meta">bicep &middot; packer &middot; reusable modules</p>
           </div>
 
-          <ul class="rota__legend">
-            <li><span class="rota__key is-out" aria-hidden="true"></span>out of hours &middot; 128h</li>
-            <li><span class="rota__key" aria-hidden="true"></span>09&ndash;17 mon&ndash;fri &middot; 40h</li>
-          </ul>
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse"></span>
+            <span class="arch__label">plan / apply</span>
+          </span>
+
+          <div class="arch__node arch__node--cloud">
+            <p class="arch__name">azure landing zones</p>
+            <p class="arch__meta">12 subscriptions &middot; networking &middot; entra id</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse" style="--d: 0.9s"></span>
+          </span>
+
+          <div class="arch__node arch__node--platform">
+            <p class="arch__name">aks</p>
+            <p class="arch__meta">helm &middot; keda &middot; gitops &middot; blue/green</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse" style="--d: 1.8s"></span>
+          </span>
+
+          <div class="arch__node arch__node--ai">
+            <p class="arch__name">azure ai services</p>
+            <p class="arch__meta">rag &middot; vector search &middot; ocr &middot; document intelligence</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse" style="--d: 2.7s"></span>
+            <span class="arch__label">metrics / logs</span>
+          </span>
+
+          <div class="arch__node arch__node--obs">
+            <p class="arch__name">observability</p>
+            <p class="arch__meta">prometheus &middot; grafana &middot; azure monitor &middot; kql</p>
+          </div>
         </div>
 
-        <div class="rota-box__figure">
-          <span class="rota-box__value">0</span>
-          <p class="rota-box__caption">
-            out-of-hours database callouts across those 128 hours, since the
-            self-service SQL change platform shipped
-          </p>
-        </div>
+        <p class="arch__foot">
+          Each layer is something I&rsquo;ve designed, shipped and run in production.
+        </p>
       </aside>
 
       <div class="cmds" data-reveal style="--reveal-delay: 200ms">

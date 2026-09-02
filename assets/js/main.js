@@ -265,47 +265,6 @@
     }
   });
 
-  // --- On-call week: mark the reader's current hour ------------------
-  var rota = document.querySelector("[data-rota]");
-  if (rota) {
-    var clockEl = rota.querySelector(".rota__clock");
-    var stateEl = rota.querySelector(".rota-box__state");
-    var dayNames = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-    var nowCell = null;
-
-    function pad(n) {
-      return (n < 10 ? "0" : "") + n;
-    }
-
-    function markNow() {
-      var now = new Date();
-      var day = (now.getDay() + 6) % 7; // shift so Monday is 0
-      var hour = now.getHours();
-      var cell = rota.querySelector(
-        '.rota__cell[data-d="' + day + '"][data-h="' + hour + '"]'
-      );
-
-      if (cell !== nowCell) {
-        if (nowCell) nowCell.classList.remove("is-now");
-        if (cell) cell.classList.add("is-now");
-        nowCell = cell;
-      }
-
-      if (clockEl) {
-        clockEl.textContent =
-          "on-call week · " + dayNames[day] + " " + pad(hour) + ":" + pad(now.getMinutes());
-      }
-      if (stateEl && cell) {
-        stateEl.textContent = cell.classList.contains("is-out")
-          ? "out of hours"
-          : "working hours";
-      }
-    }
-
-    markNow();
-    setInterval(markNow, 30000);
-  }
-
   // --- Reveal ---------------------------------------------------------
   var revealEls = document.querySelectorAll("[data-reveal]");
   if (revealEls.length && !reduceMotion && "IntersectionObserver" in window) {

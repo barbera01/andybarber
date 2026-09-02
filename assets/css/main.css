@@ -23,7 +23,7 @@
    Layout ....... .tui  .panel  .panel__title  .panel__idx  .panel__meta
                   .panel__body
    Splash ....... .splash  .banner  .cursor  .idcard  .idcard__row
-   Rota ......... .rota  .rota__cell  .rota__legend
+   Platform ..... .arch  .arch__node  .arch__flow  .arch__pulse
    Skills ....... .ls  .ls__row  .ls__dir  .ls__items  .ls__item
    Experience ... .tree  .tree__node  .tree__head  .tree__org  .tree__role
                   .tree__when  .tree__points
@@ -532,126 +532,145 @@ input {
 
 }
 
-/* --- The on-call week ------------------------------------------------ */
-.rota-box {
+/* --- The platform, as a diagram ------------------------------------- */
+.arch {
   border: 1px solid var(--border);
   background: var(--alt);
 }
 
-.rota-box__head {
+.arch__head {
   display: flex;
   align-items: center;
   gap: 1ch;
   padding: 0.5rem 1.5ch;
   border-bottom: 1px solid var(--border);
   font-size: 0.74rem;
-  color: var(--faint);
-}
-
-.rota-box__state {
-  margin-left: auto;
-  color: var(--green);
   font-weight: 700;
+  color: var(--fg);
 }
 
-.rota-box__state:empty {
-  display: none;
-}
-
-.rota-box__body {
-  padding: 1.1rem 1.5ch 1.2rem;
-}
-
-.rota {
-  display: grid;
-  grid-template-columns: auto repeat(24, minmax(0, 1fr));
-  gap: 2px;
-  align-items: center;
-}
-
-.rota__day {
-  padding-right: 1ch;
-  font-size: 0.6rem;
-  line-height: 1;
-  color: var(--faint);
-  text-align: right;
-}
-
-.rota__cell {
-  aspect-ratio: 1;
-  background: var(--hi);
-}
-
-.rota__cell.is-out {
-  background: color-mix(in srgb, var(--green) 62%, var(--alt));
-}
-
-.rota__cell.is-now {
-  background: var(--fg);
-  box-shadow: 0 0 0 2px var(--alt);
-}
-
-.rota__legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 2ch;
-  margin-top: 1rem;
-  font-size: 0.68rem;
+.arch__head-meta {
+  margin-left: auto;
+  font-weight: 400;
   color: var(--faint);
 }
 
-.rota__legend li {
+.arch__body {
+  padding: 1.2rem 1.5ch 1.3rem;
   display: flex;
-  align-items: center;
-  gap: 1ch;
+  flex-direction: column;
 }
 
-.rota__key {
-  width: 8px;
-  height: 8px;
-  background: var(--hi);
+.arch__node {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 0.5rem 1.5ch 0.55rem;
+  transition: border-color var(--speed) var(--ease);
 }
 
-.rota__key.is-out {
-  background: color-mix(in srgb, var(--green) 62%, var(--alt));
+.arch__node:hover {
+  border-color: var(--c, var(--fg));
 }
 
-.rota-box__figure {
-  display: flex;
-  align-items: flex-end;
-  gap: 2ch;
-  padding: 1.1rem 1.5ch 1.3rem;
-  border-top: 1px solid var(--border);
+.arch__name {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--c, var(--fg));
 }
 
-.rota-box__value {
-  font-stretch: 112.5%;
-  font-weight: 800;
-  font-size: 4.6rem;
-  line-height: 0.78;
-  color: var(--green);
-}
-
-.rota-box__caption {
-  font-size: 0.72rem;
-  line-height: 1.6;
+.arch__meta {
+  font-size: 0.7rem;
+  line-height: 1.55;
   color: var(--dim);
 }
 
-@media (forced-colors: active) {
-  .rota__cell,
-  .rota__key {
-    border: 1px solid CanvasText;
-    background: Canvas;
-  }
+/* Fixed hue order down the stack, matching the ls convention above. */
+.arch__node--iac { --c: var(--magenta); }
+.arch__node--cloud { --c: var(--blue); }
+.arch__node--platform { --c: var(--cyan); }
+.arch__node--ai { --c: var(--green); }
+.arch__node--obs { --c: var(--yellow); }
 
-  .rota__cell.is-out,
-  .rota__key.is-out {
-    background: CanvasText;
-  }
+/* The connector between two layers. */
+.arch__flow {
+  position: relative;
+  display: block;
+  height: 1.7rem;
+}
 
-  .rota__cell.is-now {
-    outline: 2px solid Highlight;
+.arch__flow::before {
+  content: "";
+  position: absolute;
+  left: 3ch;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.arch__flow::after {
+  content: "\25be"; /* ▾ */
+  position: absolute;
+  left: 3ch;
+  bottom: -0.15rem;
+  transform: translateX(-50%);
+  font-size: 0.66rem;
+  line-height: 1;
+  color: var(--border);
+}
+
+.arch__label {
+  position: absolute;
+  left: 5ch;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.66rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+/* A pulse travels the spine top to bottom — motion that stands for flow,
+   not for data. Killed outright under reduced motion. */
+.arch__pulse {
+  position: absolute;
+  left: 3ch;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--green);
+  opacity: 0;
+  animation: flow 3.6s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes flow {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1.7rem);
+    opacity: 0;
+  }
+}
+
+.arch__foot {
+  padding: 0.7rem 1.5ch 0.8rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch__pulse {
+    display: none;
   }
 }
 
