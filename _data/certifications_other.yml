@@ -1,10 +1,10 @@
-# Additional certifications without a dedicated badge on the site.
-# Rendered as a clean text list beneath the badge grid.
-# `badge` is optional; point it at a real SVG in assets/images/certifications/
-# to show a logo. Left empty, a neutral placeholder mark is used.
+# Further certifications, rendered beneath the headline three.
+# `badge` follows the same level rule as certifications.yml — Microsoft's
+# badge is per level (Fundamentals 1 star, Associate 2, Expert 3), so several
+# credentials legitimately share one mark.
 - name: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
   issuer: Microsoft
-  badge: ""
+  badge: /assets/images/certifications/microsoft-certified-associate.svg
 
 - name: "Microsoft Certified: Azure AI Fundamentals (AI-900)"
   issuer: Microsoft
@@ -18,6 +18,16 @@
   issuer: Microsoft
   badge: /assets/images/certifications/microsoft-certified-fundamentals.svg
 
-- name: "GitHub Certified: Foundations · Actions · Administration"
+# These are three separate GitHub credentials, not one — listed individually
+# so the count is accurate.
+- name: "GitHub Foundations"
   issuer: GitHub
-  badge: ""
+  badge: /assets/images/certifications/github-certified.svg
+
+- name: "GitHub Actions"
+  issuer: GitHub
+  badge: /assets/images/certifications/github-certified.svg
+
+- name: "GitHub Administration"
+  issuer: GitHub
+  badge: /assets/images/certifications/github-certified.svg
