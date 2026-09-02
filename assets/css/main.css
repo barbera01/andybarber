@@ -721,47 +721,94 @@ button {
   text-transform: lowercase;
 }
 
-.readout__list {
-  border-top: 1px solid var(--rule);
-}
-
-.readout__list > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.7rem 1.1rem;
+.readout__body {
+  padding: 1.1rem 1.1rem 1.25rem;
   border-bottom: 1px solid var(--rule);
 }
 
-.readout__list > div:last-child {
-  border-bottom: 0;
+/* The on-call week: 7 rows of 24 hourly cells, plus a day-initial column.
+   Emphasis encoding — the out-of-hours field carries the one hue, working
+   hours recede to grey. Cells are fluid so the grid tracks the panel. */
+.rota {
+  display: grid;
+  grid-template-columns: auto repeat(24, minmax(0, 1fr));
+  gap: 2px;
+  align-items: center;
 }
 
-.readout__list dt {
+.rota__day {
+  padding-right: 6px;
   font-family: var(--mono);
-  font-size: 0.71rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.6rem;
+  line-height: 1;
+  color: var(--ink-3);
+  text-align: right;
+}
+
+.rota__cell {
+  aspect-ratio: 1;
+  border-radius: 1px;
+  background: var(--rule);
+}
+
+.rota__cell.is-out {
+  background: color-mix(in srgb, var(--signal) 55%, var(--paper-2));
+}
+
+.rota__cell.is-now {
+  background: var(--signal);
+  outline: 1.5px solid var(--signal);
+  outline-offset: 1.5px;
+}
+
+/* Identity is never colour alone. */
+.rota__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
   color: var(--ink-3);
 }
 
-.readout__list dd {
-  margin: 0;
-  font-stretch: 125%;
-  font-weight: 700;
-  font-size: 1.15rem;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+.rota__legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.readout__list dd span {
-  font-stretch: 100%;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: var(--ink-3);
-  margin-left: 0.2rem;
+.rota__key {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--rule);
+}
+
+.rota__key.is-out {
+  background: color-mix(in srgb, var(--signal) 55%, var(--paper-2));
+}
+
+.rota__state:empty {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  .rota__cell,
+  .rota__key {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .rota__cell.is-out,
+  .rota__key.is-out {
+    background: CanvasText;
+  }
+
+  .rota__cell.is-now {
+    outline: 2px solid Highlight;
+  }
 }
 
 @media (min-width: 900px) {

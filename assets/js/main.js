@@ -139,6 +139,47 @@
   window.addEventListener("resize", onScroll, { passive: true });
   update();
 
+  // --- On-call week: mark the reader's current hour -----------------
+  var rota = document.querySelector("[data-rota]");
+  if (rota) {
+    var clockEl = rota.querySelector(".rota__clock");
+    var stateEl = rota.querySelector(".rota__state");
+    var dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var nowCell = null;
+
+    function pad(n) {
+      return (n < 10 ? "0" : "") + n;
+    }
+
+    function markNow() {
+      var now = new Date();
+      var day = (now.getDay() + 6) % 7; // shift so Monday is 0
+      var hour = now.getHours();
+      var cell = rota.querySelector(
+        '.rota__cell[data-d="' + day + '"][data-h="' + hour + '"]'
+      );
+
+      if (cell !== nowCell) {
+        if (nowCell) nowCell.classList.remove("is-now");
+        if (cell) cell.classList.add("is-now");
+        nowCell = cell;
+      }
+
+      if (clockEl) {
+        clockEl.textContent =
+          dayNames[day] + " " + pad(hour) + ":" + pad(now.getMinutes());
+      }
+      if (stateEl && cell) {
+        stateEl.textContent = cell.classList.contains("is-out")
+          ? "Out of hours"
+          : "Working hours";
+      }
+    }
+
+    markNow();
+    setInterval(markNow, 30000);
+  }
+
   // --- Footer year --------------------------------------------------
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
