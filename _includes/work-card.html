@@ -1,0 +1,36 @@
+{%- assign p = include.project -%}
+<article class="card{% if include.lead %} card--lead{% endif %}">
+  <div class="card__head">
+    <h3 class="card__title">{{ p.title }}</h3>
+    <span class="card__tag">{{ p.tag | downcase }}</span>
+  </div>
+
+  <div class="card__body">
+    {% if p.image %}
+    <div class="card__preview">
+      <img src="{{ p.image | relative_url }}" alt="{{ p.image_alt | default: p.title }}" loading="lazy">
+    </div>
+    {% endif %}
+
+    <p class="card__desc">{{ p.desc }}</p>
+
+    {% if p.highlights %}
+    <ul class="card__points">
+      {% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if p.tech %}
+    <p class="card__tech">
+      {% for t in p.tech %}<span>{{ t | downcase }}</span>{% endfor %}
+    </p>
+    {% endif %}
+
+    {% if p.url != "" or p.live %}
+    <div class="card__links">
+      {% if p.url != "" %}<a class="card__link" href="{{ p.url }}" target="_blank" rel="noopener">source</a>{% endif %}
+      {% if p.live %}<a class="card__link" href="{{ p.live }}" target="_blank" rel="noopener">live</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</article>

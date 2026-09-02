@@ -4,23 +4,24 @@ title: "Page not found"
 description: "The page you were looking for doesn't exist or has moved."
 ---
 
-<section class="section" style="border-top: 0">
-  <div class="container">
-    <header class="panel-head" data-reveal>
-      <span class="panel-head__label">404</span>
-      <span class="panel-head__meta">Route not found</span>
-    </header>
+<section class="panel" id="top">
+  <h1 class="panel__title"><span class="panel__idx">!</span>404</h1>
+  <p class="panel__meta">no such file or directory</p>
 
-    <div class="section__intro" data-reveal>
-      <h1 class="hero__statement">Dead <em>link.</em></h1>
-      <p class="section__lead">
-        That page doesn&rsquo;t exist or has moved. Everything else is one hop away.
-      </p>
-    </div>
-
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--primary" href="{{ site.baseurl }}/">Back to home</a>
-      <a class="btn btn--ghost" href="{{ site.baseurl }}/#contact">Get in touch</a>
+  <div class="panel__body">
+    <p class="banner">Dead <em>link</em><span class="cursor" aria-hidden="true"></span></p>
+    <p class="panel__lead" style="margin-top: 1.4rem">
+      That page doesn&rsquo;t exist or has moved. Everything else is one hop away.
+    </p>
+    <div class="cmds" style="max-width: 42ch">
+      <a class="cmd" href="{{ site.baseurl }}/">
+        <span class="cmd__sigil">$</span><span>cd <span class="cmd__arg">~</span></span>
+        <span class="cmd__note">home</span>
+      </a>
+      <a class="cmd" href="{{ site.baseurl }}/#contact">
+        <span class="cmd__sigil">$</span><span>mail <span class="cmd__arg">andy</span></span>
+        <span class="cmd__note">contact</span>
+      </a>
     </div>
   </div>
 </section>

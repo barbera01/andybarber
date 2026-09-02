@@ -1,57 +1,53 @@
 {%- assign cv = site.data.social | where: "icon", "download" | first -%}
-<section class="hero" id="top">
-  <div class="container">
-    <div class="hero__grid">
+<section class="panel" id="top">
+  <h1 class="panel__title"><span class="panel__idx">~</span>andy-barber.co.uk</h1>
+  <p class="panel__meta">senior sre &middot; platform &middot; applied ai</p>
 
-      <div class="hero__main">
-        <div class="hero__identity" data-reveal>
-          <img class="hero__avatar"
-               src="{{ site.headshot | relative_url }}"
-               alt="Andy Barber"
-               width="88" height="88" loading="eager">
-          <span class="hero__id-text">
-            <span class="hero__id-name">Andy Barber</span>
-            <span class="hero__id-role">Senior SRE &middot; Platform &middot; Applied AI</span>
-          </span>
+  <div class="panel__body">
+    <div class="splash">
+
+      <div data-reveal>
+        <p class="banner">Boring is<br><em>the goal</em><span class="cursor" aria-hidden="true"></span></p>
+
+        <!-- neofetch's key/value block: the facts, plainly. -->
+        <div class="idcard">
+          <img class="idcard__avatar" src="{{ site.headshot | relative_url }}"
+               alt="Andy Barber" width="184" height="184" loading="eager">
+
+          <div class="idcard__rows">
+            <p class="idcard__who">andy@andy-barber.co.uk</p>
+            <span class="idcard__rule" aria-hidden="true"></span>
+
+            <dl class="idcard__row"><dt>name</dt><dd>Andy Barber</dd></dl>
+            <dl class="idcard__row"><dt>role</dt><dd>Senior Site Reliability Engineer</dd></dl>
+            <dl class="idcard__row"><dt>uptime</dt><dd><b>20 yrs</b> in infrastructure</dd></dl>
+            <dl class="idcard__row"><dt>azure</dt><dd><b>10 yrs</b>, AKS &middot; Terraform &middot; landing zones</dd></dl>
+            <dl class="idcard__row"><dt>also</dt><dd>Applied AI &mdash; RAG, computer vision, document intelligence</dd></dl>
+            <dl class="idcard__row"><dt>pager</dt><dd>quiet</dd></dl>
+          </div>
         </div>
 
-        <h1 class="hero__statement" data-reveal style="--reveal-delay: 80ms">
-          Boring is <em>the goal.</em>
-        </h1>
-
-        <p class="hero__lead" data-reveal style="--reveal-delay: 160ms">
-          <strong>20+ years in infrastructure, a decade on Azure.</strong> I design and
-          operate Kubernetes platforms that stay up, and ship applied AI into production
-          &mdash; most recently cutting Azure spend and automating away out-of-hours
-          database callouts.
+        <p class="panel__lead" style="margin-top: 1.6rem">
+          I design and operate Kubernetes platforms that stay up, and ship applied AI
+          into production &mdash; most recently cutting Azure spend and automating away
+          out-of-hours database callouts.
         </p>
 
-        <div class="hero__actions" data-reveal style="--reveal-delay: 240ms">
-          <a class="btn btn--primary" href="#experience">View experience</a>
-          {% if cv %}<a class="btn btn--ghost" href="{{ cv.url | relative_url }}">Download CV</a>{% endif %}
-          {% for link in site.data.social %}
-            {% if link.external and link.url != "" %}
-              <a class="btn btn--ghost" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
-            {% endif %}
-          {% endfor %}
-        </div>
       </div>
 
-      <!-- The signature. Not a stat block: a real artefact from this job —
-           the on-call week, live against the reader's own clock. 128 of the
-           168 hours fall outside 09-17 Mon-Fri; the figure is what happened
-           in them. -->
-      <aside class="readout" data-rota data-reveal style="--reveal-delay: 320ms">
-        <div class="readout__head">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span class="rota__clock">On-call week</span>
-          <span class="rota__state readout__state"></span>
+      <div class="splash__side">
+      <!-- The signature: the on-call week, live against the reader's clock.
+           128 of the 168 hours fall outside 09-17 Mon-Fri. -->
+      <aside class="rota-box" data-rota data-reveal style="--reveal-delay: 120ms">
+        <div class="rota-box__head">
+          <span class="rota__clock">on-call week</span>
+          <span class="rota-box__state"></span>
         </div>
 
-        <div class="readout__body">
+        <div class="rota-box__body">
           <p class="visually-hidden">
-            A week laid out as 168 hourly cells. The 40 hours from 09:00 to 17:00,
-            Monday to Friday, are working hours; the remaining 128 are out of hours.
+            A week as 168 hourly cells. The 40 hours from 09:00 to 17:00, Monday to
+            Friday, are working hours; the remaining 128 are out of hours.
           </p>
 
           <div class="rota" aria-hidden="true">
@@ -67,19 +63,33 @@
           </div>
 
           <ul class="rota__legend">
-            <li><span class="rota__key is-out" aria-hidden="true"></span>Out of hours &middot; 128h</li>
-            <li><span class="rota__key" aria-hidden="true"></span>09&ndash;17 Mon&ndash;Fri &middot; 40h</li>
+            <li><span class="rota__key is-out" aria-hidden="true"></span>out of hours &middot; 128h</li>
+            <li><span class="rota__key" aria-hidden="true"></span>09&ndash;17 mon&ndash;fri &middot; 40h</li>
           </ul>
         </div>
 
-        <div class="readout__figure">
-          <span class="readout__value">0</span>
-          <p class="readout__caption">
+        <div class="rota-box__figure">
+          <span class="rota-box__value">0</span>
+          <p class="rota-box__caption">
             out-of-hours database callouts across those 128 hours, since the
-            self-service sql change platform shipped
+            self-service SQL change platform shipped
           </p>
         </div>
       </aside>
+
+      <div class="cmds" data-reveal style="--reveal-delay: 200ms">
+          <a class="cmd" href="#experience">
+            <span class="cmd__sigil">&gt;</span><span>experience</span>
+            <span class="cmd__note">5 roles</span>
+          </a>
+          {% if cv %}
+          <a class="cmd" href="{{ cv.url | relative_url }}">
+            <span class="cmd__sigil">&gt;</span><span>download cv</span>
+            <span class="cmd__note">pdf</span>
+          </a>
+          {% endif %}
+        </div>
+      </div>
 
     </div>
   </div>

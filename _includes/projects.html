@@ -1,98 +1,16 @@
 {%- assign featured = site.data.projects | where: "featured", true -%}
 {%- assign rest = site.data.projects | where_exp: "p", "p.featured != true" -%}
-<section class="section" id="projects">
-  <div class="container">
-    <header class="panel-head" data-reveal>
-      <span class="panel-head__label">Projects</span>
-      <span class="panel-head__meta">{{ site.data.projects | size }} selected</span>
-    </header>
+<section class="panel" id="projects" data-reveal>
+  <h2 class="panel__title"><span class="panel__idx">5</span>work</h2>
+  <p class="panel__meta">{{ site.data.projects | size }} selected</p>
 
-    <div class="section__intro" data-reveal>
-      <h2 class="section__title">Selected work</h2>
-      <p class="section__lead">
-        A few things I&rsquo;ve built, from production platforms to practical AI.
-      </p>
-    </div>
+  <div class="panel__body">
+    {% for project in featured %}{% include work-card.html project=project lead=true %}{% endfor %}
 
-    {% for project in featured %}
-    <article class="work__card work__card--lead" data-reveal>
-      {% if project.image %}
-      <div class="work__media">
-        <img src="{{ project.image | relative_url }}"
-             alt="{{ project.image_alt | default: project.title }}" loading="lazy">
-      </div>
-      {% endif %}
-
-      <div class="work__body">
-      <p class="work__tag">{{ project.tag }}</p>
-      <h3 class="work__title">{{ project.title }}</h3>
-      <p class="work__desc">{{ project.desc }}</p>
-
-      {% if project.highlights %}
-      <ul class="work__points">
-        {% for h in project.highlights %}<li>{{ h }}</li>{% endfor %}
-      </ul>
-      {% endif %}
-
-      {% if project.tech %}
-      <ul class="work__tech">
-        {% for t in project.tech %}<li class="chip">{{ t }}</li>{% endfor %}
-      </ul>
-      {% endif %}
-
-      <div class="work__links">
-        {% if project.url != "" %}
-        <a class="work__link" href="{{ project.url }}" target="_blank" rel="noopener">Source</a>
-        {% endif %}
-        {% if project.live %}
-        <a class="work__link" href="{{ project.live }}" target="_blank" rel="noopener">Live site</a>
-        {% endif %}
-      </div>
-      </div>
-    </article>
-    {% endfor %}
-
-    <!-- The remaining work varies a lot in length; column flow keeps it
+    <!-- The remaining cards vary a lot in length; column flow keeps them
          dense instead of leaving holes in a fixed grid. -->
     <div class="work__cols">
-      {% for project in rest %}
-      <article class="work__card" data-reveal>
-        {% if project.image %}
-        <div class="work__mark">
-          <img src="{{ project.image | relative_url }}"
-               alt="{{ project.image_alt | default: project.title }}"
-               width="44" height="44" loading="lazy">
-        </div>
-        {% endif %}
-
-        <p class="work__tag">{{ project.tag }}</p>
-        <h3 class="work__title">{{ project.title }}</h3>
-        <p class="work__desc">{{ project.desc }}</p>
-
-        {% if project.highlights %}
-        <ul class="work__points">
-          {% for h in project.highlights %}<li>{{ h }}</li>{% endfor %}
-        </ul>
-        {% endif %}
-
-        {% if project.tech %}
-        <ul class="work__tech">
-          {% for t in project.tech %}<li class="chip">{{ t }}</li>{% endfor %}
-        </ul>
-        {% endif %}
-
-        {% if project.url != "" or project.live %}
-        <div class="work__links">
-          {% if project.url != "" %}
-          <a class="work__link" href="{{ project.url }}" target="_blank" rel="noopener">Source</a>
-          {% endif %}
-          {% if project.live %}
-          <a class="work__link" href="{{ project.live }}" target="_blank" rel="noopener">Live site</a>
-          {% endif %}
-        </div>
-        {% endif %}
-      </article>
-      {% endfor %}
+      {% for project in rest %}{% include work-card.html project=project %}{% endfor %}
     </div>
   </div>
 </section>

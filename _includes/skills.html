@@ -2,29 +2,26 @@
 {%- for group in site.data.skills -%}
   {%- assign tool_count = tool_count | plus: group.items.size -%}
 {%- endfor -%}
-<section class="section" id="skills">
-  <div class="container">
-    <header class="panel-head" data-reveal>
-      <span class="panel-head__label">Skills</span>
-      <span class="panel-head__meta">{{ site.data.skills | size }} domains &middot; {{ tool_count }} tools</span>
-    </header>
+<section class="panel" id="skills" data-reveal>
+  <h2 class="panel__title"><span class="panel__idx">2</span>skills</h2>
+  <p class="panel__meta">{{ site.data.skills | size }} domains &middot; {{ tool_count }} tools</p>
 
-    <div class="section__intro" data-reveal>
-      <h2 class="section__title">What I work with</h2>
-      <p class="section__lead">
-        The platforms, tools and practices I rely on to keep production systems reliable.
-      </p>
+  <div class="panel__body">
+    <div class="filter">
+      <span class="filter__sigil" aria-hidden="true">/</span>
+      <label class="visually-hidden" for="skill-filter">Filter skills</label>
+      <input class="filter__input" id="skill-filter" type="search"
+             placeholder="filter &mdash; try 'azure' or 'terraform'" autocomplete="off">
+      <span class="filter__count" data-filter-count>{{ tool_count }} shown</span>
     </div>
 
-    <div class="matrix">
+    <div class="ls" data-ls>
       {% for group in site.data.skills %}
-      <div class="matrix__row matrix__row--{{ forloop.index }}" data-reveal>
-        <h3 class="matrix__key">
-          <span class="matrix__tick" aria-hidden="true"></span>{{ group.group }}
-        </h3>
-        <div class="matrix__vals">
-          {% for item in group.items %}<span class="chip">{{ item }}</span>{% endfor %}
-        </div>
+      <div class="ls__row ls__row--{{ forloop.index }}">
+        <p class="ls__dir">{{ group.group | downcase | replace: " / ", "/" | replace: " ", "-" }}/</p>
+        <p class="ls__items">
+          {% for item in group.items %}<span class="ls__item">{{ item }}</span>{% endfor %}
+        </p>
       </div>
       {% endfor %}
     </div>

@@ -26,14 +26,13 @@
 
   <link rel="icon" href="{{ site.baseurl }}{{ site.favicon }}" type="image/svg+xml">
 
-  <meta name="theme-color" content="#eef0ea" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0f1411" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#10141c" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#eef1f5" media="(prefers-color-scheme: light)">
 
-  <!-- Type: Archivo (variable — the width axis carries the hierarchy)
-       + IBM Plex Mono for labels and readouts. System stack fallback in CSS. -->
+  <!-- One typeface, as a terminal has. The width axis carries the hierarchy. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..800&display=swap">
 
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
 </head>
@@ -42,7 +41,7 @@
 
   {% include navigation.html %}
 
-  <main id="main">
+  <main id="main" class="tui">
     {{ content }}
   </main>
 

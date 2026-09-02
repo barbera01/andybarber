@@ -1,21 +1,31 @@
-<footer class="footer">
-  <div class="container">
-    <div class="footer__inner">
+<footer class="status">
+  <span class="status__mode">NORMAL</span>
+  <span class="status__loc" data-loc>~</span>
 
-      <p>
-        &copy; <span data-year>{{ "now" | date: "%Y" }}</span> Andy Barber
-        &middot; Built with Jekyll &middot; No trackers
-      </p>
-
-      <div class="footer__links">
-        {% for link in site.data.social %}
-          {% if link.url != "" %}
-            <a href="{{ link.url | relative_url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
-          {% endif %}
-        {% endfor %}
-        <a href="{{ site.baseurl }}/sitemap.xml">Sitemap</a>
-      </div>
-
-    </div>
+  <div class="status__keys" aria-hidden="true">
+    <span class="key"><b>?</b> help</span>
+    <span class="key"><b>/</b> filter</span>
+    <span class="key"><b>1-6</b> jump</span>
+    <span class="key"><b>j k</b> scroll</span>
+    <span class="key">&copy; <span data-year>{{ "now" | date: "%Y" }}</span> Andy Barber</span>
   </div>
 </footer>
+
+<div class="help" id="help" hidden>
+  <div class="help__box" role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <p class="help__head" id="help-title">
+      Keys
+      <span class="help__close">esc to close</span>
+    </p>
+    <dl class="help__grid">
+      <dt>1 &ndash; 6</dt><dd>Jump to a section</dd>
+      <dt>j / k</dt><dd>Scroll down / up</dd>
+      <dt>g / G</dt><dd>Top / end</dd>
+      <dt>/</dt><dd>Filter the skill list</dd>
+      <dt>e</dt><dd>Expand or collapse every role</dd>
+      <dt>c</dt><dd>Copy email address</dd>
+      <dt>?</dt><dd>This panel</dd>
+      <dt>esc</dt><dd>Close / clear the filter</dd>
+    </dl>
+  </div>
+</div>
