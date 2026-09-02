@@ -1,39 +1,36 @@
-<section class="section" id="certifications">
-  <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">Certifications</p>
-      <h2 class="section__title">Current credentials</h2>
-      <p class="section__lead">
-        Backed by current, verifiable credentials.
-      </p>
-    </div>
+{%- assign cert_total = site.data.certifications.size | plus: site.data.certifications_other.size -%}
+<section class="panel" id="certifications" data-reveal>
+  <h2 class="panel__title"><span class="panel__idx">4</span>certifications</h2>
+  <p class="panel__meta">{{ cert_total }} credentials</p>
 
-    <div class="certs__grid">
-      {% for cert in site.data.certifications %}
-      <div class="cert-card" data-reveal>
-        <div class="cert-card__badge">
-          <img src="{{ cert.badge | relative_url }}" alt="{{ cert.alt }}">
-        </div>
-        <div>
-          <p class="cert-card__title">{{ cert.name }}</p>
-          <p class="cert-card__issuer">{{ cert.issuer }}</p>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    {% if site.data.certifications_other %}
-    <ul class="certs__other" data-reveal>
-      {% for cert in site.data.certifications_other %}
-      <li>
-        <img class="certs__other-badge"
-             src="{{ cert.badge | default: '/assets/images/certifications/cert-placeholder.svg' | relative_url }}"
-             alt="" width="22" height="22" loading="lazy">
-        <span class="certs__other-name">{{ cert.name }}</span>
-        <span class="certs__other-issuer">{{ cert.issuer }}</span>
-      </li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+  <div class="panel__body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="visually-hidden">Badge</span></th>
+          <th scope="col">Credential</th>
+          <th scope="col">Issuer</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cert in site.data.certifications %}
+        <tr>
+          <td><img class="badge" src="{{ cert.badge | relative_url }}" alt="{{ cert.alt }}" loading="lazy"></td>
+          <td class="table__name">{{ cert.name }}</td>
+          <td class="table__issuer">{{ cert.issuer | downcase }}</td>
+          <td class="table__state">&#9679; active</td>
+        </tr>
+        {% endfor %}
+        {% for cert in site.data.certifications_other %}
+        <tr>
+          <td><img class="badge" src="{{ cert.badge | default: '/assets/images/certifications/cert-placeholder.svg' | relative_url }}" alt="" loading="lazy"></td>
+          <td class="table__name">{{ cert.name }}</td>
+          <td class="table__issuer">{{ cert.issuer | downcase }}</td>
+          <td class="table__state">&#9679; active</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </section>

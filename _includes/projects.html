@@ -1,48 +1,16 @@
-<section class="section" id="projects">
-  <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">Projects</p>
-      <h2 class="section__title">Selected work</h2>
-      <p class="section__lead">
-        A few things I&rsquo;ve built, from production platforms to practical AI.
-      </p>
-    </div>
+{%- assign featured = site.data.projects | where: "featured", true -%}
+{%- assign rest = site.data.projects | where_exp: "p", "p.featured != true" -%}
+<section class="panel" id="projects" data-reveal>
+  <h2 class="panel__title"><span class="panel__idx">5</span>work</h2>
+  <p class="panel__meta">{{ site.data.projects | size }} selected</p>
 
-    <div class="projects__grid">
-      {% for project in site.data.projects %}
-      <div class="project-card{% if project.featured %} project-card--featured{% endif %}" data-reveal>
-        {% if project.image %}
-        <div class="project-card__media">
-          <img src="{{ project.image | relative_url }}" alt="{{ project.image_alt | default: project.title }}" loading="lazy">
-        </div>
-        {% endif %}
-        <span class="project-card__tag">{{ project.tag }}</span>
-        <h3 class="project-card__title">{{ project.title }}</h3>
-        <p class="project-card__desc">{{ project.desc }}</p>
-        {% if project.highlights %}
-        <ul class="project-card__highlights">
-          {% for h in project.highlights %}<li>{{ h }}</li>{% endfor %}
-        </ul>
-        {% endif %}
-        {% if project.tech %}
-        <ul class="tag-list project-card__tech">
-          {% for t in project.tech %}<li class="tag tag--{{ t | slugify }}">{{ t }}</li>{% endfor %}
-        </ul>
-        {% endif %}
-        <div class="project-card__links">
-          {% if project.url != "" %}
-          <a class="project-card__link" href="{{ project.url }}" target="_blank" rel="noopener">
-            View project
-          </a>
-          {% endif %}
-          {% if project.live %}
-          <a class="project-card__link project-card__link--live" href="{{ project.live }}" target="_blank" rel="noopener">
-            Live site
-          </a>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
+  <div class="panel__body">
+    {% for project in featured %}{% include work-card.html project=project lead=true %}{% endfor %}
+
+    <!-- The remaining cards vary a lot in length; column flow keeps them
+         dense instead of leaving holes in a fixed grid. -->
+    <div class="work__cols">
+      {% for project in rest %}{% include work-card.html project=project %}{% endfor %}
     </div>
   </div>
 </section>

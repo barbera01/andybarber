@@ -1,23 +1,31 @@
-<section class="section contact" id="contact">
-  <div class="container">
-    <div class="contact__inner" data-reveal>
-      <p class="eyebrow">Contact</p>
-      <h2 class="contact__title">Let&rsquo;s build something reliable.</h2>
-      <p class="contact__lead">
-        I&rsquo;m open to interesting platform, reliability and applied-AI problems.
-        The fastest way to reach me is below.
-      </p>
+{%- assign mail = site.data.social | where: "icon", "mail" | first -%}
+<section class="panel" id="contact" data-reveal>
+  <h2 class="panel__title"><span class="panel__idx">6</span>contact</h2>
+  <p class="panel__meta">open to new work</p>
 
-      <div class="contact__actions">
-        {% for link in site.data.social %}
-          {% if link.url != "" %}
-          <a class="btn {% if link.icon == "mail" %}btn--primary{% else %}btn--ghost{% endif %}"
-            href="{{ link.url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>
-            {{ link.label }}
-          </a>
-          {% endif %}
-        {% endfor %}
-      </div>
+  <div class="panel__body">
+    <p class="panel__lead">
+      Open to interesting platform, reliability and applied-AI problems.
+      Email is the fastest way to reach me.
+    </p>
+
+    <div class="cmds">
+      {% if mail %}
+      <a class="cmd" href="{{ mail.url }}" data-email="{{ mail.display | default: mail.label }}">
+        <span class="cmd__sigil">$</span>
+        <span>mail <span class="cmd__arg">{{ mail.display | default: mail.label }}</span></span>
+        <span class="cmd__note">press c to copy</span>
+      </a>
+      {% endif %}
+      {% for link in site.data.social %}
+        {% if link.url != "" and link.icon != "mail" %}
+        <a class="cmd" href="{{ link.url | relative_url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>
+          <span class="cmd__sigil">$</span>
+          <span>{% if link.icon == "download" %}curl -O{% else %}open{% endif %} <span class="cmd__arg">{{ link.url | split: "//" | last | remove: "www." }}</span></span>
+          <span class="cmd__note">{{ link.label | downcase }}</span>
+        </a>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>

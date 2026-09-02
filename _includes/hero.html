@@ -1,31 +1,113 @@
-<section class="hero" id="top">
-  <div class="container">
-    <div class="hero__inner">
+{%- assign cv = site.data.social | where: "icon", "download" | first -%}
+<section class="panel" id="top">
+  <h1 class="panel__title"><span class="panel__idx">~</span>andy-barber.co.uk</h1>
+  <p class="panel__meta">senior sre &middot; platform &middot; applied ai</p>
 
-      <div class="hero__content" data-reveal>
-        <p class="hero__eyebrow eyebrow">Cloud &middot; Platform &middot; Applied AI</p>
-        <h1 class="hero__title">Andy Barber</h1>
-        <p class="hero__subtitle">
-          20+ years in infrastructure, a decade on Azure. I design and operate reliable
-          Kubernetes platforms and ship applied AI into production &mdash; most recently
-          significantly cutting Azure spend and automating away out-of-hours database callouts.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#experience">View Experience</a>
-          <a class="btn btn--ghost" href="#contact">Get in touch</a>
-          {% for link in site.data.social %}
-            {% if link.external and link.url != "" %}
-              <a class="btn btn--ghost" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
-            {% endif %}
-          {% endfor %}
+  <div class="panel__body">
+    <div class="splash">
+
+      <div data-reveal>
+        <p class="banner">Boring is<br><em>the goal</em><span class="cursor" aria-hidden="true"></span></p>
+
+        <!-- neofetch's key/value block: the facts, plainly. -->
+        <div class="idcard">
+          <img class="idcard__avatar" src="{{ site.headshot | relative_url }}"
+               alt="Andy Barber" width="184" height="184" loading="eager">
+
+          <div class="idcard__rows">
+            <p class="idcard__who">andy@andy-barber.co.uk</p>
+            <span class="idcard__rule" aria-hidden="true"></span>
+
+            <dl class="idcard__row"><dt>name</dt><dd>Andy Barber</dd></dl>
+            <dl class="idcard__row"><dt>role</dt><dd>Senior Site Reliability Engineer</dd></dl>
+            <dl class="idcard__row"><dt>uptime</dt><dd><b>20 yrs</b> in infrastructure</dd></dl>
+            <dl class="idcard__row"><dt>azure</dt><dd><b>10 yrs</b>, AKS &middot; Terraform &middot; landing zones</dd></dl>
+            <dl class="idcard__row"><dt>ai</dt><dd>RAG &middot; vector search &middot; computer vision &middot; document intelligence</dd></dl>
+            <dl class="idcard__row"><dt>status</dt><dd>open to new work</dd></dl>
+          </div>
         </div>
+
+        <p class="panel__lead" style="margin-top: 1.6rem">
+          I design and operate Kubernetes platforms that stay up, and ship applied AI
+          into production &mdash; most recently cutting Azure spend and automating away
+          out-of-hours database callouts.
+        </p>
+
       </div>
 
-      <div class="hero__media" data-reveal>
-        <img class="hero__portrait"
-             src="{{ site.headshot | relative_url }}"
-             alt="Portrait of Andy Barber"
-             width="600" height="800" loading="eager">
+      <div class="splash__side">
+      <!-- The signature. The artifact of the trade is an architecture
+           diagram, so that is what the panel shows: the shape of the
+           platforms he designs and runs. Every node comes from _data —
+           skills.yml for the tooling, experience.yml for the numbers. -->
+      <aside class="arch" data-reveal style="--reveal-delay: 120ms">
+        <div class="arch__head">
+          <span>platform</span>
+          <span class="arch__head-meta">what i build</span>
+        </div>
+
+        <div class="arch__body">
+          <div class="arch__node arch__node--iac">
+            <p class="arch__name">terraform</p>
+            <p class="arch__meta">bicep &middot; packer &middot; reusable modules</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse"></span>
+            <span class="arch__label">plan / apply</span>
+          </span>
+
+          <div class="arch__node arch__node--cloud">
+            <p class="arch__name">azure landing zones</p>
+            <p class="arch__meta">12 subscriptions &middot; networking &middot; entra id</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse" style="--d: 0.9s"></span>
+          </span>
+
+          <div class="arch__node arch__node--platform">
+            <p class="arch__name">aks</p>
+            <p class="arch__meta">helm &middot; keda &middot; gitops &middot; blue/green</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse" style="--d: 1.8s"></span>
+          </span>
+
+          <div class="arch__node arch__node--ai">
+            <p class="arch__name">azure ai services</p>
+            <p class="arch__meta">rag &middot; vector search &middot; ocr &middot; document intelligence</p>
+          </div>
+
+          <span class="arch__flow" aria-hidden="true">
+            <span class="arch__pulse" style="--d: 2.7s"></span>
+            <span class="arch__label">metrics / logs</span>
+          </span>
+
+          <div class="arch__node arch__node--obs">
+            <p class="arch__name">observability</p>
+            <p class="arch__meta">prometheus &middot; grafana &middot; azure monitor &middot; kql</p>
+          </div>
+        </div>
+
+        <p class="arch__foot">
+          Each layer is something I&rsquo;ve designed, shipped and run in production.
+        </p>
+      </aside>
+
+      <div class="cmds" data-reveal style="--reveal-delay: 200ms">
+          <a class="cmd" href="#experience">
+            <span class="cmd__sigil">&gt;</span><span>experience</span>
+            <span class="cmd__note">5 roles</span>
+          </a>
+          {% if cv %}
+          <a class="cmd" href="{{ cv.url | relative_url }}">
+            <span class="cmd__sigil">&gt;</span><span>download cv</span>
+            <span class="cmd__note">pdf</span>
+          </a>
+          {% endif %}
+        </div>
       </div>
 
     </div>

@@ -1,24 +1,27 @@
-<section class="section" id="skills">
-  <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">Skills</p>
-      <h2 class="section__title">What I work with</h2>
-      <p class="section__lead">
-        The platforms, tools and practices I rely on to keep production systems reliable.
-      </p>
+{%- assign tool_count = 0 -%}
+{%- for group in site.data.skills -%}
+  {%- assign tool_count = tool_count | plus: group.items.size -%}
+{%- endfor -%}
+<section class="panel" id="skills" data-reveal>
+  <h2 class="panel__title"><span class="panel__idx">2</span>skills</h2>
+  <p class="panel__meta">{{ site.data.skills | size }} domains &middot; {{ tool_count }} tools</p>
+
+  <div class="panel__body">
+    <div class="filter">
+      <span class="filter__sigil" aria-hidden="true">/</span>
+      <label class="visually-hidden" for="skill-filter">Filter skills</label>
+      <input class="filter__input" id="skill-filter" type="search"
+             placeholder="filter &mdash; try 'azure' or 'terraform'" autocomplete="off">
+      <span class="filter__count" data-filter-count>{{ tool_count }} shown</span>
     </div>
 
-    <div class="skills__grid">
+    <div class="ls" data-ls>
       {% for group in site.data.skills %}
-      <div class="skill-group skill-group--{{ forloop.index }}" data-reveal>
-        <h3 class="skill-group__title">
-          <span class="tick" aria-hidden="true"></span>{{ group.group }}
-        </h3>
-        <div class="tag-list">
-          {% for item in group.items %}
-          <span class="tag tag--{{ item | slugify }}">{{ item }}</span>
-          {% endfor %}
-        </div>
+      <div class="ls__row ls__row--{{ forloop.index }}">
+        <p class="ls__dir">{{ group.group | downcase | replace: " / ", "/" | replace: " ", "-" }}/</p>
+        <p class="ls__items">
+          {% for item in group.items %}<span class="ls__item">{{ item }}</span>{% endfor %}
+        </p>
       </div>
       {% endfor %}
     </div>
