@@ -1,0 +1,11 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Terraform Associate certification mark">
+  <defs>
+    <linearGradient id="tf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7b61ff"/>
+      <stop offset="1" stop-color="#5a46e0"/>
+    </linearGradient>
+  </defs>
+  <path d="M150 22 L262 88 L262 212 L150 278 L38 212 L38 88 Z" fill="none" stroke="url(#tf)" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M150 44 L242 98 L242 202 L150 256 L58 202 L58 98 Z" fill="url(#tf)" opacity="0.12"/>
+  <text x="150" y="150" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="96" font-weight="700" fill="url(#tf)">TF</text>
+</svg>

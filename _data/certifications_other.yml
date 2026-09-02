@@ -1,0 +1,23 @@
+# Additional certifications without a dedicated badge on the site.
+# Rendered as a clean text list beneath the badge grid.
+# `badge` is optional; point it at a real SVG in assets/images/certifications/
+# to show a logo. Left empty, a neutral placeholder mark is used.
+- name: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
+  issuer: Microsoft
+  badge: ""
+
+- name: "Microsoft Certified: Azure AI Fundamentals (AI-900)"
+  issuer: Microsoft
+  badge: /assets/images/certifications/microsoft-certified-fundamentals.svg
+
+- name: "Microsoft Certified: Azure Fundamentals (AZ-900)"
+  issuer: Microsoft
+  badge: /assets/images/certifications/microsoft-certified-fundamentals.svg
+
+- name: "Microsoft Certified: Azure Data Fundamentals (DP-900)"
+  issuer: Microsoft
+  badge: /assets/images/certifications/microsoft-certified-fundamentals.svg
+
+- name: "GitHub Certified: Foundations · Actions · Administration"
+  issuer: GitHub
+  badge: ""

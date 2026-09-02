@@ -1,0 +1,1321 @@
+/* =====================================================================
+   andy-barber.co.uk — Design System (refined dark / "Modern Dark Cinema")
+   A dark, technical, premium aesthetic. One electric accent, confident
+   display type, layered depth, gentle motion. Mobile-first. No frameworks.
+   Type: Inter (display) + JetBrains Mono (labels), loaded in default.html
+   with a system-font fallback. Direction informed by the ui-ux-pro-max
+   design system (Dark OLED + Inter "Modern Dark Cinema").
+
+   CLASS CONTRACT (used by the _includes/*.html partials)
+   ---------------------------------------------------------------------
+   Layout ....... .container  .container--narrow
+   Section ...... .section  .section__header  .eyebrow  .section__title  .section__lead
+   Buttons ...... .btn  .btn--primary  .btn--ghost  .btn--sm
+   Navigation ... .nav  .nav__inner  .nav__brand  .nav__menu  .nav__links  .nav__link  .nav__toggle
+   Hero ......... .hero  .hero__inner  .hero__content  .hero__eyebrow  .hero__title
+                  .hero__subtitle  .hero__actions  .hero__media  .hero__portrait
+   About ........ .about  .about__inner  .about__media  .about__text
+   Skills ....... .skills  .skills__grid  .skill-group  .skill-group__title  .tag-list  .tag
+   Experience ... .experience  .timeline  .timeline__item  .timeline__marker  .timeline__body
+                  .timeline__role  .timeline__org  .timeline__meta  .timeline__points
+   Certs ........ .certs  .certs__grid  .cert-card  .cert-card__badge  .cert-card__title  .cert-card__issuer
+   Projects ..... .projects  .projects__grid  .project-card  .project-card__tag  .project-card__title  .project-card__desc  .project-card__link
+   Contact ...... .contact  .contact__inner  .contact__title  .contact__lead  .contact__actions
+   Footer ....... .footer  .footer__inner  .footer__meta  .footer__links
+   Utility ...... .visually-hidden   [data-reveal] / .is-revealed
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. Tokens
+   --------------------------------------------------------------------- */
+:root {
+  /* Layout */
+  --page-width: 1200px;
+  --content-width: 70ch;
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  --section-pad: clamp(4.5rem, 10vw, 9rem);
+  --radius: 16px;
+  --radius-sm: 10px;
+
+  /* Colour — layered midnight, one electric accent */
+  --bg: #070b12;
+  --bg-soft: #0a0f18;
+  --surface: rgba(148, 178, 255, 0.035);
+  --surface-2: rgba(148, 178, 255, 0.07);
+  --surface-solid: #101623;
+  --border: rgba(148, 178, 255, 0.1);
+  --border-strong: rgba(148, 178, 255, 0.26);
+  --text: #ecf1f8;
+  --text-muted: #a6b1c2;
+  --text-faint: #6d7887;
+  --accent: #6ea8ff;
+  --accent-strong: #9cc2ff;
+  --accent-ink: #051020;
+  --accent-soft: rgba(110, 168, 255, 0.12);
+  --accent-glow: rgba(110, 168, 255, 0.32);
+
+  /* Type */
+  --font-sans:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas,
+    monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --speed: 260ms;
+}
+
+/* ---------------------------------------------------------------------
+   2. Reset / base
+   --------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem; /* keep anchors clear of the sticky nav */
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings:
+    "cv05" 1,
+    "ss01" 1,
+    "tnum" 0;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ambient backdrop: layered radial glows + a faint technical grid. Static only. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      70rem 44rem at 82% -12%,
+      var(--accent-soft),
+      transparent 62%
+    ),
+    radial-gradient(
+      50rem 34rem at -8% 8%,
+      rgba(110, 168, 255, 0.06),
+      transparent 60%
+    ),
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    46px 46px,
+    46px 46px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 82%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 82%);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--speed) var(--ease);
+}
+
+a:hover {
+  color: var(--accent-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------------
+   3. Typography
+   --------------------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+p {
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------------
+   4. Layout
+   --------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-width: var(--content-width);
+}
+
+.section {
+  padding-block: var(--section-pad);
+  scroll-margin-top: 5.5rem;
+}
+
+.section__header {
+  max-width: var(--content-width);
+  margin-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+.section__title {
+  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+  margin-bottom: 0.9rem;
+}
+
+.section__lead {
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  color: var(--text-muted);
+  max-width: var(--content-width);
+}
+
+/* ---------------------------------------------------------------------
+   5. Buttons
+   --------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform var(--speed) var(--ease),
+    background-color var(--speed) var(--ease),
+    border-color var(--speed) var(--ease),
+    color var(--speed) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px -12px var(--accent-glow);
+}
+
+.btn--primary:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: var(--accent-ink);
+  box-shadow: 0 14px 38px -12px var(--accent-glow);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.btn--sm {
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+}
+
+/* ---------------------------------------------------------------------
+   6. Navigation
+   --------------------------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(7, 11, 18, 0.66);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 4rem;
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+
+.nav__brand:hover {
+  color: var(--text);
+}
+
+.nav__brand .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.nav__brand .handle {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+
+.nav__toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0.6rem;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.nav__toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text);
+  border-radius: 2px;
+  transition:
+    transform var(--speed) var(--ease),
+    opacity var(--speed) var(--ease);
+}
+
+.nav--open .nav__toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav--open .nav__toggle span:nth-child(2) {
+  opacity: 0;
+}
+.nav--open .nav__toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem var(--gutter) 1.25rem;
+  display: none;
+}
+
+.nav--open .nav__menu {
+  display: block;
+}
+
+.nav__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav__link {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav__link:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* Desktop navigation */
+@media (min-width: 860px) {
+  .nav__toggle {
+    display: none;
+  }
+  .nav__menu {
+    position: static;
+    display: block;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .nav__links {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .nav__link {
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   7. Hero
+   --------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+/* Soft ambient glow anchoring the hero headline. Static only. */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -8%;
+  left: -6%;
+  width: 44rem;
+  height: 30rem;
+  max-width: 90vw;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    var(--accent-soft),
+    transparent 70%
+  );
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+
+.hero__eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+.hero__title {
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  margin-bottom: 1.2rem;
+}
+
+.hero__title .accent {
+  background: linear-gradient(
+    115deg,
+    var(--accent-strong) 0%,
+    var(--accent) 55%,
+    #6f7bff 120%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero__subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.32rem);
+  color: var(--text-muted);
+  max-width: 36ch;
+  margin-bottom: 2.1rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.hero__media {
+  justify-self: center;
+}
+
+.hero__portrait {
+  width: clamp(200px, 26vw, 300px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box,
+    linear-gradient(135deg, var(--accent-strong), var(--accent) 45%, #6f7bff)
+      border-box;
+  box-shadow:
+    0 30px 70px -28px rgba(0, 0, 0, 0.85),
+    0 0 0 6px var(--accent-soft),
+    0 0 90px -18px var(--accent-glow);
+}
+
+@media (min-width: 860px) {
+  .hero__inner {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  .hero__media {
+    justify-self: end;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   8. About
+   --------------------------------------------------------------------- */
+.about__inner {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+
+.about__text p {
+  margin-bottom: 1.1rem;
+  font-size: clamp(1.02rem, 1.6vw, 1.16rem);
+}
+
+.about__text p:last-child {
+  margin-bottom: 0;
+}
+
+.about__text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.about__media img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+@media (min-width: 860px) {
+  .about__inner {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   9. Skills
+   --------------------------------------------------------------------- */
+.skills__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.skill-group {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  transition:
+    border-color var(--speed) var(--ease),
+    transform var(--speed) var(--ease),
+    background-color var(--speed) var(--ease),
+    box-shadow var(--speed) var(--ease);
+}
+
+/* Gradient top-edge sheen shared by cards. */
+.skill-group::before,
+.timeline__body::before,
+.cert-card::before,
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-soft) 40%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity var(--speed) var(--ease);
+}
+
+.skill-group:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  transform: translateY(-4px);
+  box-shadow:
+    0 24px 48px -24px rgba(0, 0, 0, 0.7),
+    0 0 40px -18px var(--accent-glow);
+}
+
+.skill-group:hover::before {
+  opacity: 1;
+}
+
+.skill-group__title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.skill-group__title .tick {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--pill-fg, var(--accent));
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--pill-fg, var(--text-muted));
+  background: var(--pill-bg, var(--bg-soft));
+  border: 1px solid var(--pill-border, var(--border));
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  transition:
+    color var(--speed) var(--ease),
+    border-color var(--speed) var(--ease),
+    background-color var(--speed) var(--ease);
+}
+
+/* Group hue tokens (Skills order): 1 Cloud · 2 Platform/Containers · 3 IaC ·
+   4 Reliability/Ops · 5 Development · 6 Applied AI. Applied to pills via
+   --pill-* vars so a skill keeps its colour wherever it appears. */
+:root {
+  --g1-fg: #9cc2ff; --g1-bg: rgba(110, 168, 255, 0.1); --g1-bd: rgba(110, 168, 255, 0.28);
+  --g2-fg: #5eead4; --g2-bg: rgba(45, 212, 191, 0.1);  --g2-bd: rgba(45, 212, 191, 0.28);
+  --g3-fg: #c4b5fd; --g3-bg: rgba(167, 139, 250, 0.1); --g3-bd: rgba(167, 139, 250, 0.3);
+  --g4-fg: #fbbf24; --g4-bg: rgba(251, 191, 36, 0.1);  --g4-bd: rgba(251, 191, 36, 0.26);
+  --g5-fg: #f9a8d4; --g5-bg: rgba(244, 114, 182, 0.1); --g5-bd: rgba(244, 114, 182, 0.26);
+  --g6-fg: #7dd3fc; --g6-bg: rgba(56, 189, 248, 0.1);  --g6-bd: rgba(56, 189, 248, 0.28);
+}
+
+/* Group cards set the default pill colour for their contents. */
+.skill-group--1 { --pill-fg: var(--g1-fg); --pill-bg: var(--g1-bg); --pill-border: var(--g1-bd); }
+.skill-group--2 { --pill-fg: var(--g2-fg); --pill-bg: var(--g2-bg); --pill-border: var(--g2-bd); }
+.skill-group--3 { --pill-fg: var(--g3-fg); --pill-bg: var(--g3-bg); --pill-border: var(--g3-bd); }
+.skill-group--4 { --pill-fg: var(--g4-fg); --pill-bg: var(--g4-bg); --pill-border: var(--g4-bd); }
+.skill-group--5 { --pill-fg: var(--g5-fg); --pill-bg: var(--g5-bg); --pill-border: var(--g5-bd); }
+.skill-group--6 { --pill-fg: var(--g6-fg); --pill-bg: var(--g6-bg); --pill-border: var(--g6-bd); }
+
+/* Individual skill -> its group hue (used anywhere a .tag appears, e.g. the
+   project tech lists). Class is tag--<slugified name>, matched to Jekyll's
+   `slugify` output. Unmapped tags fall back to the default pill style. */
+
+/* 1 · Cloud (azure) */
+.tag--microsoft-azure, .tag--azure-landing-zones, .tag--aks, .tag--azure-paas,
+.tag--azure-sql, .tag--storage, .tag--networking, .tag--entra-id, .tag--azure {
+  --pill-fg: var(--g1-fg); --pill-bg: var(--g1-bg); --pill-border: var(--g1-bd);
+}
+
+/* 2 · Platform / Containers (teal) */
+.tag--kubernetes, .tag--docker, .tag--helm, .tag--keda, .tag--gitops,
+.tag--azure-devops, .tag--github-actions, .tag--rabbitmq {
+  --pill-fg: var(--g2-fg); --pill-bg: var(--g2-bg); --pill-border: var(--g2-bd);
+}
+
+/* 3 · Infrastructure as Code (violet) */
+.tag--terraform, .tag--bicep, .tag--arm, .tag--packer, .tag--ci-cd,
+.tag--blue-green-canary {
+  --pill-fg: var(--g3-fg); --pill-bg: var(--g3-bg); --pill-border: var(--g3-bd);
+}
+
+/* 4 · Reliability / Operations (amber) */
+.tag--sre, .tag--observability, .tag--datadog, .tag--azure-monitor, .tag--grafana,
+.tag--prometheus, .tag--kql, .tag--finops {
+  --pill-fg: var(--g4-fg); --pill-bg: var(--g4-bg); --pill-border: var(--g4-bd);
+}
+
+/* 5 · Development (rose) */
+.tag--powershell, .tag--python, .tag--go, .tag--c, .tag--bash, .tag--rest-graphql,
+.tag--lua {
+  --pill-fg: var(--g5-fg); --pill-bg: var(--g5-bg); --pill-border: var(--g5-bd);
+}
+
+/* 6 · Applied AI (sky) */
+.tag--azure-ai-services, .tag--retrieval-augmented-generation, .tag--vector-search,
+.tag--computer-vision-ocr, .tag--prompt-engineering, .tag--ollama-llama-cpp,
+.tag--whisper, .tag--n8n, .tag--local-llm-tts {
+  --pill-fg: var(--g6-fg); --pill-bg: var(--g6-bg); --pill-border: var(--g6-bd);
+}
+
+.skill-group:hover .tag,
+.tag:hover {
+  color: var(--pill-fg, var(--accent-strong));
+  border-color: var(--pill-border, var(--border-strong));
+}
+
+@media (min-width: 600px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .skills__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   10. Experience (timeline)
+   --------------------------------------------------------------------- */
+.timeline {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+}
+
+.timeline__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline__marker .node {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  flex: none;
+}
+
+.timeline__marker .line {
+  flex: 1;
+  width: 2px;
+  background: var(--border);
+  margin-top: 0.4rem;
+}
+
+.timeline__item:last-child .timeline__marker .line {
+  display: none;
+}
+
+.timeline__body {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  margin-bottom: 0.4rem;
+  transition:
+    border-color var(--speed) var(--ease),
+    background-color var(--speed) var(--ease),
+    box-shadow var(--speed) var(--ease);
+}
+
+.timeline__body:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.7);
+}
+
+.timeline__body:hover::before {
+  opacity: 1;
+}
+
+.timeline__role {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Logo + role/org header row. */
+.timeline__head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+/* Logo tile: a uniform rounded chip so logos with mixed backgrounds
+   (white / black / transparent) sit consistently on the dark theme. */
+.timeline__logo {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 11px;
+  object-fit: cover;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* Logos that are already transparent SVG marks (e.g. Microsoft) don't need
+   the white tile behind them. */
+.timeline__logo[src$=".svg"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.timeline__heading {
+  min-width: 0;
+}
+
+.timeline__org {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-top: 0.15rem;
+}
+
+.timeline__meta {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  margin-top: 0.35rem;
+}
+
+.timeline__points {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.timeline__points li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+.timeline__points li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------------
+   11. Certifications
+   --------------------------------------------------------------------- */
+.certs__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.cert-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.7rem;
+  transition:
+    border-color var(--speed) var(--ease),
+    transform var(--speed) var(--ease),
+    background-color var(--speed) var(--ease),
+    box-shadow var(--speed) var(--ease);
+}
+
+.cert-card:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  transform: translateY(-4px);
+  box-shadow:
+    0 24px 48px -24px rgba(0, 0, 0, 0.7),
+    0 0 40px -18px var(--accent-glow);
+}
+
+.cert-card:hover::before {
+  opacity: 1;
+}
+
+.cert-card__badge {
+  width: 110px;
+  height: 110px;
+  flex: none;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+}
+
+.cert-card__badge img,
+.cert-card__badge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cert-card__title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.cert-card__issuer {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+@media (min-width: 600px) {
+  .certs__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Additional certifications (no badge) — a clean two-column list. */
+.certs__other {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+  display: grid;
+  gap: 0.6rem 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.75rem;
+}
+
+.certs__other li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+}
+
+.certs__other-badge {
+  width: 90px;
+  height: 90px;
+  flex: none;
+  object-fit: contain;
+}
+
+.certs__other-name {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.certs__other-issuer {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+@media (min-width: 768px) {
+  .certs__other {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .certs__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   12. Projects
+   --------------------------------------------------------------------- */
+.projects__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.85rem;
+  transition:
+    border-color var(--speed) var(--ease),
+    transform var(--speed) var(--ease),
+    background-color var(--speed) var(--ease),
+    box-shadow var(--speed) var(--ease);
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-6px);
+  box-shadow:
+    0 32px 60px -24px rgba(0, 0, 0, 0.8),
+    0 0 50px -14px var(--accent-glow);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover .project-card__title {
+  color: var(--accent-strong);
+}
+
+.project-card__tag {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: linear-gradient(120deg, var(--accent-strong), var(--accent));
+  border: 0;
+  border-radius: 999px;
+  padding: 0.36rem 0.8rem;
+  box-shadow: 0 6px 18px -8px var(--accent-glow);
+}
+
+.project-card__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  transition: color var(--speed) var(--ease);
+}
+
+/* Project thumbnail. Full-bleed to the card edges, cropped to a banner. */
+.project-card__media {
+  margin: -1.85rem -1.85rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.project-card__media img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--speed) var(--ease), filter var(--speed) var(--ease);
+  filter: saturate(1.05);
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.03);
+}
+
+/* Taster bullets drawn from the project README. */
+.project-card__highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.project-card__highlights li {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.project-card__highlights li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.project-card__desc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.project-card__link {
+  margin-top: 0.35rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.project-card__link::after {
+  content: "→";
+  transition: transform var(--speed) var(--ease);
+}
+
+.project-card__link:hover::after {
+  transform: translateX(4px);
+}
+
+/* Tech tags on a project card (reuses .tag-list/.tag from Skills). */
+.project-card__tech {
+  margin-top: 0.35rem;
+}
+
+.project-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.project-card__links .project-card__link {
+  margin-top: 0;
+}
+
+.project-card__link--live {
+  color: var(--accent-strong);
+}
+
+/* Featured project: a subtle accent edge so it reads as the highlight
+   while staying visually consistent with the rest of the grid. */
+.project-card--featured {
+  border-color: var(--border-strong);
+  background:
+    linear-gradient(180deg, var(--accent-soft), transparent 38%), var(--surface);
+}
+
+.project-card--featured::before {
+  opacity: 1;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-glow) 40%,
+    transparent
+  );
+}
+
+/* The featured card spans the full grid and shows a taller blueprint banner. */
+@media (min-width: 768px) {
+  .project-card--featured {
+    grid-column: 1 / -1;
+  }
+  .project-card--featured .project-card__media img {
+    height: 260px;
+  }
+}
+
+@media (min-width: 768px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   13. Contact
+   --------------------------------------------------------------------- */
+.contact {
+  background: var(--bg-soft);
+  border-block: 1px solid var(--border);
+}
+
+.contact__inner {
+  text-align: center;
+  max-width: var(--content-width);
+  margin-inline: auto;
+}
+
+.contact__title {
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  margin-bottom: 1rem;
+}
+
+.contact__lead {
+  font-size: clamp(1.02rem, 1.8vw, 1.2rem);
+  margin-bottom: 2rem;
+}
+
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+/* ---------------------------------------------------------------------
+   14. Footer
+   --------------------------------------------------------------------- */
+.footer {
+  padding-block: 2.5rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.footer__meta {
+  font-size: 0.88rem;
+  color: var(--text-faint);
+}
+
+.footer__meta .handle {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.footer__links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer__links a {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.footer__links a:hover {
+  color: var(--accent-strong);
+}
+
+@media (min-width: 600px) {
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   15. Reveal animation (progressive; no-op without JS / reduced motion)
+   --------------------------------------------------------------------- */
+/* Soft, slightly deeper reveal (no-op without JS / reduced motion). */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------
+   16. Utilities
+   --------------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------------
+   17. Reduced motion
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

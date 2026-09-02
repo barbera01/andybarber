@@ -1,0 +1,41 @@
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section__header" data-reveal>
+      <p class="eyebrow">Experience</p>
+      <h2 class="section__title">Career highlights</h2>
+      <p class="section__lead">
+        A few of the teams and problems I&rsquo;ve worked on &mdash; outcomes over job descriptions.
+      </p>
+    </div>
+
+    <div class="timeline">
+      {% for job in site.data.experience %}
+      <div class="timeline__item" data-reveal>
+        <div class="timeline__marker">
+          <span class="node" aria-hidden="true"></span>
+          <span class="line" aria-hidden="true"></span>
+        </div>
+        <div class="timeline__body">
+          <div class="timeline__head">
+            {% if job.logo %}
+            <img class="timeline__logo" src="{{ job.logo | relative_url }}" alt="{{ job.org }} logo" width="40" height="40" loading="lazy">
+            {% endif %}
+            <div class="timeline__heading">
+              <p class="timeline__role">{{ job.role }}</p>
+              <p class="timeline__org">{{ job.org }}</p>
+              {% if job.period != "" %}
+              <p class="timeline__meta">{{ job.period }}</p>
+              {% endif %}
+            </div>
+          </div>
+          <ul class="timeline__points">
+            {% for point in job.points %}
+            <li>{{ point }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

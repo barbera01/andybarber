@@ -1,0 +1,20 @@
+# Certifications. Badge paths are relative to the site root; apply
+# `| relative_url` in the include. `url` is left empty on purpose —
+# do not invent certificate IDs or verification links.
+- name: "Microsoft Certified: Azure Solutions Architect Expert"
+  issuer: Microsoft
+  badge: /assets/images/certifications/azure-solutions-architect-expert.svg
+  alt: Microsoft Azure Solutions Architect Expert badge
+  url: ""
+
+- name: "Microsoft Certified: Azure AI Engineer Associate"
+  issuer: Microsoft
+  badge: /assets/images/certifications/azure-ai-engineer-associate.svg
+  alt: Microsoft Azure AI Engineer Associate badge
+  url: ""
+
+- name: "HashiCorp Certified: Terraform Associate"
+  issuer: HashiCorp
+  badge: /assets/images/certifications/terraform-associate.svg
+  alt: Terraform Associate certification mark
+  url: ""

@@ -1,0 +1,58 @@
+# Selected work. Only verifiable / supplied descriptions — no invented metrics.
+#
+# Optional fields:
+#   image      — thumbnail shown at the top of the card (path under assets/)
+#   image_alt  — alt text for the thumbnail
+#   highlights — short bullet tasters drawn from the project README
+#   tech       — short skill tags (coloured per the site-wide pill mapping)
+#   live       — live-site URL shown alongside the repo link
+#   featured   — marks the card for emphasis (Herb Hub 365)
+- tag: Full-Stack Platform
+  title: "Herb Hub 365"
+  desc: "A self-hosted, largely autonomous greenhouse platform. Raspberry Pi sensors and cameras feed an event-driven pipeline of Go microservices that turn telemetry into daily AI-written posts, audio narration and timelapse videos — and drive automated watering."
+  url: "https://github.com/barbera01/HerbHub365"
+  live: "https://herbhub365.com"
+  featured: true
+  image: /assets/images/projects/herbhub365-map.jpg
+  image_alt: "Herb Hub 365 system blueprint — Raspberry Pi sensors, RabbitMQ event bus, LLM content pipeline, video generation and Azure hosting"
+  highlights:
+    - "Event-driven Go microservices on a RabbitMQ backbone (sensor snapshots, watering, video)."
+    - "Local-first AI: Ollama with a Gemini fallback, Kokoro TTS narration, MuseTalk avatar video."
+    - "Terraform-managed Azure hosting, with Prometheus + Grafana observability."
+  tech:
+    - Go
+    - RabbitMQ
+    - Docker
+    - Terraform
+    - Azure
+    - Local LLM / TTS
+
+- tag: Developer Tooling
+  title: "MPWrap"
+  desc: "A Neovim plugin with an interactive side panel for working with MicroPython devices via mpremote — filesystem browser, live REPL and one-key device actions."
+  url: "https://github.com/barbera01/MPWrap"
+  image: /assets/images/projects/mpwrap-logo.jpg
+  image_alt: "MPWrap.nvim logo"
+  highlights:
+    - "Three-pane side panel: action menu, filesystem browser and live MicroPython REPL."
+    - "Non-blocking mpremote operations with upload, download and exact-mirror directory sync."
+    - "Keyboard-first workflow with a `:checkhealth` provider for diagnostics."
+  tech:
+    - Lua
+    - Neovim
+    - MicroPython
+
+- tag: "Azure / Platform Engineering"
+  title: "Azure Platform & Landing Zones"
+  desc: "Design and operation of Azure landing zones, AKS platforms, Infrastructure as Code and production operations."
+  url: ""
+
+- tag: Applied AI
+  title: "AI Documentation Assistant"
+  desc: "A retrieval-augmented documentation assistant delivered as a Microsoft Word add-in — grounded, cited answers inside the authoring workflow."
+  url: ""
+
+- tag: Applied AI
+  title: "Computer Vision / OCR Pipeline"
+  desc: "A production Azure AI Services pipeline processing several hundred thousand documents for OCR and PII classification, governed with Microsoft Purview."
+  url: ""

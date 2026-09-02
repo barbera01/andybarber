@@ -1,0 +1,61 @@
+# Core skills, grouped. Rendered as cards of short tags (no progress bars).
+- group: Cloud
+  items:
+    - Microsoft Azure
+    - Azure Landing Zones
+    - AKS
+    - Azure PaaS
+    - Azure SQL
+    - Storage
+    - Networking
+    - Entra ID
+
+- group: Platform / Containers
+  items:
+    - Kubernetes
+    - Docker
+    - Helm
+    - KEDA
+    - GitOps
+    - Azure DevOps
+    - GitHub Actions
+
+- group: Infrastructure as Code
+  items:
+    - Terraform
+    - Bicep
+    - ARM
+    - Packer
+    - CI/CD
+    - Blue/green & canary
+
+- group: Reliability / Operations
+  items:
+    - SRE
+    - Observability
+    - Datadog
+    - Azure Monitor
+    - Grafana
+    - Prometheus
+    - KQL
+    - FinOps
+
+- group: Development
+  items:
+    - PowerShell
+    - Python
+    - Go
+    - C#
+    - Bash
+    - REST / GraphQL
+
+- group: Applied AI
+  items:
+    - Azure AI Services
+    - Retrieval-Augmented Generation
+    - Vector search
+    - Computer Vision / OCR
+    - Prompt engineering
+    - Ollama / llama.cpp
+    - Whisper
+    - n8n

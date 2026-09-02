@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------
+# andy-barber.co.uk — Jekyll configuration
+# ------------------------------------------------------------------
+
+title: Andy Barber
+name: Andy Barber
+description: Senior engineer designing and operating reliable Azure and Kubernetes platforms, and turning AI into production systems.
+lang: en
+
+# Production origin (used for canonical + Open Graph URLs)
+url: https://andy-barber.co.uk
+baseurl: ""
+
+# Brand / image assets. Referenced by the layout and includes via
+# `| relative_url` (baseurl is "" so these resolve to the site root).
+favicon: /assets/images/favicon.svg
+headshot: /assets/images/profile/headshot.jpg
+cartoon: /assets/images/profile/cartoon.jpg
+og_image: /assets/images/profile/headshot.jpg
+
+# We author plain HTML — no Markdown engine or highlighter required.
+markdown: kramdown
+highlighter: none
+
+# Never copy these into the built _site/ output.
+exclude:
+  - .DS_Store
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+
+# Every page uses the default layout by default.
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"

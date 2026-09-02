@@ -1,0 +1,32 @@
+# --- Jekyll build output ---
+_site/
+_site.json
+
+# --- Cache (Jekyll / SASS) ---
+.jekyll-cache/
+.sass-cache/
+
+# --- Ruby / bundler environment ---
+.bundle/
+.rbenv-gemsets/
+*.gem
+*.rbc
+vendor/bundle/
+
+# --- Lock file: do not commit dependency pins for a site others fork ---
+Gemfile.lock
+
+# --- macOS metadata (those mac_*.dat cruft files) ---
+._*
+.DS_Store
+
+# --- Editors / IDEs ---
+.idea/
+*.iml
+*.code-workspace
+
+# --- Logs, state, misc ---
+*.log
+*.tmp
+*.bak
+.env

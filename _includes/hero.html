@@ -1,0 +1,33 @@
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero__inner">
+
+      <div class="hero__content" data-reveal>
+        <p class="hero__eyebrow eyebrow">Cloud &middot; Platform &middot; Applied AI</p>
+        <h1 class="hero__title">Andy Barber</h1>
+        <p class="hero__subtitle">
+          20+ years in infrastructure, a decade on Azure. I design and operate reliable
+          Kubernetes platforms and ship applied AI into production &mdash; most recently
+          cutting Azure spend 30% and automating away out-of-hours database callouts.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#experience">View Experience</a>
+          <a class="btn btn--ghost" href="#contact">Get in touch</a>
+          {% for link in site.data.social %}
+            {% if link.external and link.url != "" %}
+              <a class="btn btn--ghost" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="hero__media" data-reveal>
+        <img class="hero__portrait"
+             src="{{ site.headshot | relative_url }}"
+             alt="Portrait of Andy Barber"
+             width="600" height="800" loading="eager">
+      </div>
+
+    </div>
+  </div>
+</section>

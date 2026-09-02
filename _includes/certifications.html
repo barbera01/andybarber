@@ -1,0 +1,39 @@
+<section class="section" id="certifications">
+  <div class="container">
+    <div class="section__header" data-reveal>
+      <p class="eyebrow">Certifications</p>
+      <h2 class="section__title">Current credentials</h2>
+      <p class="section__lead">
+        Backed by current, verifiable credentials.
+      </p>
+    </div>
+
+    <div class="certs__grid">
+      {% for cert in site.data.certifications %}
+      <div class="cert-card" data-reveal>
+        <div class="cert-card__badge">
+          <img src="{{ cert.badge | relative_url }}" alt="{{ cert.alt }}">
+        </div>
+        <div>
+          <p class="cert-card__title">{{ cert.name }}</p>
+          <p class="cert-card__issuer">{{ cert.issuer }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if site.data.certifications_other %}
+    <ul class="certs__other" data-reveal>
+      {% for cert in site.data.certifications_other %}
+      <li>
+        <img class="certs__other-badge"
+             src="{{ cert.badge | default: '/assets/images/certifications/cert-placeholder.svg' | relative_url }}"
+             alt="" width="22" height="22" loading="lazy">
+        <span class="certs__other-name">{{ cert.name }}</span>
+        <span class="certs__other-issuer">{{ cert.issuer }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</section>

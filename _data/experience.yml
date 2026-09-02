@@ -1,0 +1,46 @@
+# Career highlights — areas of responsibility and outcomes, drawn from the CV.
+# `period` is hidden automatically when left empty.
+# `logo` is an optional mark shown beside the role; point it at a real brand
+# SVG in assets/images/employers/ to replace the placeholder.
+- org: Sorted Group
+  role: Senior Site Reliability Engineer
+  period: "Dec 2025 – Aug 2026"
+  logo: /assets/images/employers/sorted.jpg
+  points:
+    - "Built a Slack-driven self-service SQL change platform (PowerShell Durable Functions, durable timers, automated recovery and firewall cleanup) that removed out-of-hours database callouts entirely."
+    - "Authored reusable Terraform modules adopted as the standard Azure deployment pattern across 12 subscriptions."
+    - "Embedded DevSecOps scanning and blue/green + canary releases; built the FinOps practice behind a 30% reduction in Azure spend."
+
+- org: Extrinsica Global
+  role: Cloud Solution Engineer
+  period: "Jun 2024 – Dec 2025"
+  logo: /assets/images/employers/extrinsica.jpg
+  points:
+    - "Designed a production Azure computer-vision / OCR pipeline processing several hundred thousand documents for PII classification, governed with Purview."
+    - "Built a retrieval-augmented documentation assistant as a Microsoft Word add-in — RAG applied to a real authoring workflow."
+    - "Architected a self-service image pipeline that cut customer AVD image builds from weeks to hours (Packer, Docker, Vue.js + C#, Azure Compute Gallery)."
+
+- org: CluedIn
+  role: Implementation / Infrastructure & SRE Engineer
+  period: "Aug 2022 – Jun 2024"
+  logo: /assets/images/employers/cluedin.png
+  points:
+    - "Deployed the CluedIn MDM platform on AKS for enterprise customers including Bayer, Microsoft and Svevia."
+    - "Led KEDA event-driven autoscaling with custom Helm charts, cutting thousands per month from Kubernetes compute spend."
+    - "Standardised design and deployment artefacts (Helm, ARM/Bicep) improving installation consistency and supportability."
+
+- org: Microsoft
+  role: Support Engineer, Azure Monitor (EMEA)
+  period: "Oct 2021 – Aug 2022"
+  logo: /assets/images/employers/microsoft.svg
+  points:
+    - "Supported enterprise customers implementing Azure Monitor, Application Insights and Log Analytics."
+    - "Analysed telemetry and logs to isolate performance bottlenecks and improve availability for large-scale platforms."
+
+- org: "WANdisco / Cirata"
+  role: Customer Success Engineer
+  period: "Mar 2020 – Oct 2021"
+  logo: /assets/images/employers/wandisco.png
+  points:
+    - "Contributed to a published migration of 500TB across 8.6M files from a live 800-node Hadoop cluster to AWS S3 with zero business disruption."
+    - "Built Logstash ingest pipelines and Kibana dashboards correlating tens of thousands of log lines into a repeatable diagnostic capability."

@@ -1,0 +1,26 @@
+# Contact + professional links.
+#
+# NOTE — VERIFY BEFORE PUBLISHING:
+#   The LinkedIn + GitHub handles and the email are sensible defaults
+#   derived from the name/domain, not confirmed. Drop a real CV path into
+#   the `cv` entry and it will appear automatically in the hero + contact.
+- label: LinkedIn
+  url: "https://www.linkedin.com/in/andy-barber-uk/"
+  icon: linkedin
+  external: true
+
+- label: GitHub
+  url: "https://github.com/barbera01/"
+  icon: github
+  external: true
+
+- label: Email
+  url: "mailto:andy@andy-barber.co.uk"
+  display: "andy@andy-barber.co.uk"
+  icon: mail
+
+- label: Download CV
+  url: /assets/files/Andy-Barber-CV.pdf
+  display: "PDF"
+  icon: download
+  external: false

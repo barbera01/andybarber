@@ -1,0 +1,21 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+
+      <p class="footer__meta">
+        &copy; <span data-year>{{ "now" | date: "%Y" }}</span> Andy Barber
+        &middot; <span class="handle">andy-barber.co.uk</span>
+      </p>
+
+      <div class="footer__links">
+        {% for link in site.data.social %}
+          {% if link.url != "" %}
+            <a href="{{ link.url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
+          {% endif %}
+        {% endfor %}
+        <a href="{{ site.baseurl }}/sitemap.xml">Sitemap</a>
+      </div>
+
+    </div>
+  </div>
+</footer>
