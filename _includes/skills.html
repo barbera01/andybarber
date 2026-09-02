@@ -1,23 +1,29 @@
+{%- assign tool_count = 0 -%}
+{%- for group in site.data.skills -%}
+  {%- assign tool_count = tool_count | plus: group.items.size -%}
+{%- endfor -%}
 <section class="section" id="skills">
   <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">Skills</p>
+    <header class="panel-head" data-reveal>
+      <span class="panel-head__label">Skills</span>
+      <span class="panel-head__meta">{{ site.data.skills | size }} domains &middot; {{ tool_count }} tools</span>
+    </header>
+
+    <div class="section__intro" data-reveal>
       <h2 class="section__title">What I work with</h2>
       <p class="section__lead">
         The platforms, tools and practices I rely on to keep production systems reliable.
       </p>
     </div>
 
-    <div class="skills__grid">
+    <div class="matrix">
       {% for group in site.data.skills %}
-      <div class="skill-group skill-group--{{ forloop.index }}" data-reveal>
-        <h3 class="skill-group__title">
-          <span class="tick" aria-hidden="true"></span>{{ group.group }}
+      <div class="matrix__row matrix__row--{{ forloop.index }}" data-reveal>
+        <h3 class="matrix__key">
+          <span class="matrix__tick" aria-hidden="true"></span>{{ group.group }}
         </h3>
-        <div class="tag-list">
-          {% for item in group.items %}
-          <span class="tag tag--{{ item | slugify }}">{{ item }}</span>
-          {% endfor %}
+        <div class="matrix__vals">
+          {% for item in group.items %}<span class="chip">{{ item }}</span>{% endfor %}
         </div>
       </div>
       {% endfor %}

@@ -4,18 +4,23 @@ title: "Page not found"
 description: "The page you were looking for doesn't exist or has moved."
 ---
 
-<section class="section">
+<section class="section" style="border-top: 0">
   <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">404</p>
-      <h1 class="section__title">Page not found</h1>
+    <header class="panel-head" data-reveal>
+      <span class="panel-head__label">404</span>
+      <span class="panel-head__meta">Route not found</span>
+    </header>
+
+    <div class="section__intro" data-reveal>
+      <h1 class="hero__statement">Dead <em>link.</em></h1>
       <p class="section__lead">
-        The page you were looking for doesn&rsquo;t exist or has moved.
+        That page doesn&rsquo;t exist or has moved. Everything else is one hop away.
       </p>
     </div>
+
     <div class="hero__actions" data-reveal>
       <a class="btn btn--primary" href="{{ site.baseurl }}/">Back to home</a>
-      <a class="btn btn--ghost" href="{{ site.baseurl }}#contact">Get in touch</a>
+      <a class="btn btn--ghost" href="{{ site.baseurl }}/#contact">Get in touch</a>
     </div>
   </div>
 </section>

@@ -1,20 +1,26 @@
+{%- assign mail = site.data.social | where: "icon", "mail" | first -%}
 <section class="section contact" id="contact">
   <div class="container">
-    <div class="contact__inner" data-reveal>
-      <p class="eyebrow">Contact</p>
-      <h2 class="contact__title">Let&rsquo;s build something reliable.</h2>
+    <header class="panel-head" data-reveal>
+      <span class="panel-head__label">Contact</span>
+      <span class="panel-head__meta">Open to new work</span>
+    </header>
+
+    <div data-reveal>
+      <h2 class="contact__title">Let&rsquo;s make something dependable.</h2>
       <p class="contact__lead">
         I&rsquo;m open to interesting platform, reliability and applied-AI problems.
-        The fastest way to reach me is below.
+        Email is the fastest way to reach me.
       </p>
+
+      {% if mail %}
+      <a class="contact__address" href="{{ mail.url }}">{{ mail.display | default: mail.label }}</a>
+      {% endif %}
 
       <div class="contact__actions">
         {% for link in site.data.social %}
-          {% if link.url != "" %}
-          <a class="btn {% if link.icon == "mail" %}btn--primary{% else %}btn--ghost{% endif %}"
-            href="{{ link.url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>
-            {{ link.label }}
-          </a>
+          {% if link.url != "" and link.icon != "mail" %}
+          <a class="btn btn--ghost" href="{{ link.url | relative_url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
           {% endif %}
         {% endfor %}
       </div>

@@ -1,18 +1,34 @@
+{%- assign cv = site.data.social | where: "icon", "download" | first -%}
 <section class="hero" id="top">
   <div class="container">
-    <div class="hero__inner">
+    <div class="hero__grid">
 
-      <div class="hero__content" data-reveal>
-        <p class="hero__eyebrow eyebrow">Cloud &middot; Platform &middot; Applied AI</p>
-        <h1 class="hero__title">Andy Barber</h1>
-        <p class="hero__subtitle">
-          20+ years in infrastructure, a decade on Azure. I design and operate reliable
-          Kubernetes platforms and ship applied AI into production &mdash; most recently
-          significantly cutting Azure spend and automating away out-of-hours database callouts.
+      <div class="hero__main">
+        <div class="hero__identity" data-reveal>
+          <img class="hero__avatar"
+               src="{{ site.headshot | relative_url }}"
+               alt="Andy Barber"
+               width="88" height="88" loading="eager">
+          <span class="hero__id-text">
+            <span class="hero__id-name">Andy Barber</span>
+            <span class="hero__id-role">Senior SRE &middot; Platform &middot; Applied AI</span>
+          </span>
+        </div>
+
+        <h1 class="hero__statement" data-reveal style="--reveal-delay: 80ms">
+          Boring is <em>the goal.</em>
+        </h1>
+
+        <p class="hero__lead" data-reveal style="--reveal-delay: 160ms">
+          <strong>20+ years in infrastructure, a decade on Azure.</strong> I design and
+          operate Kubernetes platforms that stay up, and ship applied AI into production
+          &mdash; most recently cutting Azure spend and automating away out-of-hours
+          database callouts.
         </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#experience">View Experience</a>
-          <a class="btn btn--ghost" href="#contact">Get in touch</a>
+
+        <div class="hero__actions" data-reveal style="--reveal-delay: 240ms">
+          <a class="btn btn--primary" href="#experience">View experience</a>
+          {% if cv %}<a class="btn btn--ghost" href="{{ cv.url | relative_url }}">Download CV</a>{% endif %}
           {% for link in site.data.social %}
             {% if link.external and link.url != "" %}
               <a class="btn btn--ghost" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
@@ -21,12 +37,37 @@
         </div>
       </div>
 
-      <div class="hero__media" data-reveal>
-        <img class="hero__portrait"
-             src="{{ site.headshot | relative_url }}"
-             alt="Portrait of Andy Barber"
-             width="600" height="800" loading="eager">
-      </div>
+      <!-- The readout. The number an SRE is proudest of is a zero. -->
+      <aside class="readout" data-reveal style="--reveal-delay: 320ms"
+             aria-label="Selected figures">
+        <div class="readout__head">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>pager</span>
+          <span class="readout__state">quiet</span>
+        </div>
+
+        <div class="readout__figure">
+          <span class="readout__value">0</span>
+          <p class="readout__caption">
+            out-of-hours database callouts, since the self-service SQL change platform shipped
+          </p>
+        </div>
+
+        <dl class="readout__list">
+          <div>
+            <dt>In infrastructure</dt>
+            <dd>20<span>yrs</span></dd>
+          </div>
+          <div>
+            <dt>On Azure</dt>
+            <dd>10<span>yrs</span></dd>
+          </div>
+          <div>
+            <dt>Subscriptions standardised</dt>
+            <dd>12</dd>
+          </div>
+        </dl>
+      </aside>
 
     </div>
   </div>

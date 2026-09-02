@@ -2,15 +2,15 @@
   <div class="container">
     <div class="footer__inner">
 
-      <p class="footer__meta">
+      <p>
         &copy; <span data-year>{{ "now" | date: "%Y" }}</span> Andy Barber
-        &middot; <span class="handle">andy-barber.co.uk</span>
+        &middot; Built with Jekyll &middot; No trackers
       </p>
 
       <div class="footer__links">
         {% for link in site.data.social %}
           {% if link.url != "" %}
-            <a href="{{ link.url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
+            <a href="{{ link.url | relative_url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
           {% endif %}
         {% endfor %}
         <a href="{{ site.baseurl }}/sitemap.xml">Sitemap</a>

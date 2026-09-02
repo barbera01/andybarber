@@ -26,14 +26,20 @@
 
   <link rel="icon" href="{{ site.baseurl }}{{ site.favicon }}" type="image/svg+xml">
 
-  <!-- Typography: Inter (self-hosted fallback to system stack in CSS) -->
+  <meta name="theme-color" content="#eef0ea" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1411" media="(prefers-color-scheme: dark)">
+
+  <!-- Type: Archivo (variable — the width axis carries the hierarchy)
+       + IBM Plex Mono for labels and readouts. System stack fallback in CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   {% include navigation.html %}
 
   <main id="main">

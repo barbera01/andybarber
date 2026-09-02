@@ -1,41 +1,41 @@
 <section class="section" id="experience">
   <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">Experience</p>
+    <header class="panel-head" data-reveal>
+      <span class="panel-head__label">Experience</span>
+      <span class="panel-head__meta">{{ site.data.experience | size }} roles &middot; most recent first</span>
+    </header>
+
+    <div class="section__intro" data-reveal>
       <h2 class="section__title">Career highlights</h2>
       <p class="section__lead">
-        A few of the teams and problems I&rsquo;ve worked on &mdash; outcomes over job descriptions.
+        A few of the teams and problems I&rsquo;ve worked on &mdash; outcomes over job
+        descriptions.
       </p>
     </div>
 
-    <div class="timeline">
+    <ol class="ledger">
       {% for job in site.data.experience %}
-      <div class="timeline__item" data-reveal>
-        <div class="timeline__marker">
-          <span class="node" aria-hidden="true"></span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <div class="timeline__body">
-          <div class="timeline__head">
+      <li class="ledger__row" data-reveal>
+        <p class="ledger__when">{% if job.period != "" %}{{ job.period }}{% endif %}</p>
+
+        <div class="ledger__what">
+          <div class="ledger__head">
             {% if job.logo %}
-            <img class="timeline__logo" src="{{ job.logo | relative_url }}" alt="{{ job.org }} logo" width="40" height="40" loading="lazy">
+            <img class="ledger__logo" src="{{ job.logo | relative_url }}"
+                 alt="{{ job.org }} logo" width="34" height="34" loading="lazy">
             {% endif %}
-            <div class="timeline__heading">
-              <p class="timeline__role">{{ job.role }}</p>
-              <p class="timeline__org">{{ job.org }}</p>
-              {% if job.period != "" %}
-              <p class="timeline__meta">{{ job.period }}</p>
-              {% endif %}
+            <div>
+              <h3 class="ledger__role">{{ job.role }}</h3>
+              <p class="ledger__org">{{ job.org }}</p>
             </div>
           </div>
-          <ul class="timeline__points">
-            {% for point in job.points %}
-            <li>{{ point }}</li>
-            {% endfor %}
+
+          <ul class="ledger__points">
+            {% for point in job.points %}<li>{{ point }}</li>{% endfor %}
           </ul>
         </div>
-      </div>
+      </li>
       {% endfor %}
-    </div>
+    </ol>
   </div>
 </section>

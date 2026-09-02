@@ -33,7 +33,7 @@
     });
 
     // Close if the viewport grows past the mobile breakpoint.
-    window.matchMedia("(min-width: 860px)").addEventListener("change", function (m) {
+    window.matchMedia("(min-width: 900px)").addEventListener("change", function (m) {
       if (m.matches) closeMenu();
     });
   }
@@ -55,29 +55,89 @@
     });
   }
 
-  // --- Gentle section reveal (respects reduced motion) -------------
+  // --- Section reveal, staggered within each group -----------------
   var revealEls = document.querySelectorAll("[data-reveal]");
+
+  function showAll() {
+    revealEls.forEach(function (el) {
+      el.classList.add("is-revealed");
+    });
+  }
+
   if (revealEls.length && !reduceMotion && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            io.unobserve(entry.target);
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          // Respect a delay already authored in the markup; otherwise
+          // stagger siblings so a grid arrives in reading order.
+          if (!el.style.getPropertyValue("--reveal-delay")) {
+            var siblings = Array.prototype.filter.call(
+              el.parentNode.children,
+              function (n) {
+                return n.hasAttribute && n.hasAttribute("data-reveal");
+              }
+            );
+            var i = siblings.indexOf(el);
+            if (i > 0) el.style.setProperty("--reveal-delay", Math.min(i, 6) * 55 + "ms");
           }
+          el.classList.add("is-revealed");
+          io.unobserve(el);
         });
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.1 }
     );
     revealEls.forEach(function (el) {
       io.observe(el);
     });
   } else {
-    // Ensure content is never hidden if JS/IO is unavailable.
-    revealEls.forEach(function (el) {
-      el.classList.add("is-revealed");
-    });
+    // Content is never hidden if JS or IntersectionObserver is unavailable.
+    showAll();
   }
+
+  // --- Scroll gauge + current section ------------------------------
+  var rail = document.querySelector(".nav__rail");
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav__link"));
+  var sections = navLinks
+    .map(function (link) {
+      return document.querySelector(link.getAttribute("href"));
+    })
+    .filter(Boolean);
+
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+
+    if (rail) {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+      rail.style.setProperty("--progress", Math.min(1, Math.max(0, progress)).toFixed(4));
+    }
+
+    if (sections.length) {
+      // The current section is the last one whose top has passed the nav.
+      var line = window.scrollY + (nav ? nav.offsetHeight : 0) + 8;
+      var current = -1;
+      sections.forEach(function (section, i) {
+        if (section.offsetTop <= line) current = i;
+      });
+      navLinks.forEach(function (link, i) {
+        link.classList.toggle("is-current", i === current);
+      });
+    }
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
 
   // --- Footer year --------------------------------------------------
   var year = document.querySelector("[data-year]");

@@ -1,36 +1,41 @@
+{%- assign cert_total = site.data.certifications.size | plus: site.data.certifications_other.size -%}
 <section class="section" id="certifications">
   <div class="container">
-    <div class="section__header" data-reveal>
-      <p class="eyebrow">Certifications</p>
+    <header class="panel-head" data-reveal>
+      <span class="panel-head__label">Certifications</span>
+      <span class="panel-head__meta">{{ cert_total }} credentials</span>
+    </header>
+
+    <div class="section__intro" data-reveal>
       <h2 class="section__title">Current credentials</h2>
       <p class="section__lead">
-        Backed by current, verifiable credentials.
+        Backed by current, verifiable credentials across Azure, AI and infrastructure
+        as code.
       </p>
     </div>
 
-    <div class="certs__grid">
+    <div class="certs">
       {% for cert in site.data.certifications %}
-      <div class="cert-card" data-reveal>
-        <div class="cert-card__badge">
-          <img src="{{ cert.badge | relative_url }}" alt="{{ cert.alt }}">
+      <div class="cert" data-reveal>
+        <div class="cert__badge">
+          <img src="{{ cert.badge | relative_url }}" alt="{{ cert.alt }}" loading="lazy">
         </div>
         <div>
-          <p class="cert-card__title">{{ cert.name }}</p>
-          <p class="cert-card__issuer">{{ cert.issuer }}</p>
+          <p class="cert__name">{{ cert.name }}</p>
+          <p class="cert__issuer">{{ cert.issuer }}</p>
         </div>
       </div>
       {% endfor %}
     </div>
 
     {% if site.data.certifications_other %}
-    <ul class="certs__other" data-reveal>
+    <ul class="certs__more" data-reveal>
       {% for cert in site.data.certifications_other %}
       <li>
-        <img class="certs__other-badge"
-             src="{{ cert.badge | default: '/assets/images/certifications/cert-placeholder.svg' | relative_url }}"
-             alt="" width="22" height="22" loading="lazy">
-        <span class="certs__other-name">{{ cert.name }}</span>
-        <span class="certs__other-issuer">{{ cert.issuer }}</span>
+        <img src="{{ cert.badge | default: '/assets/images/certifications/cert-placeholder.svg' | relative_url }}"
+             alt="" width="20" height="20" loading="lazy">
+        <span>{{ cert.name }}</span>
+        <span class="certs__more-issuer">{{ cert.issuer }}</span>
       </li>
       {% endfor %}
     </ul>
