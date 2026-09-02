@@ -9,7 +9,7 @@
   points:
     - "Built a Slack-driven self-service SQL change platform (PowerShell Durable Functions, durable timers, automated recovery and firewall cleanup) that removed out-of-hours database callouts entirely."
     - "Authored reusable Terraform modules adopted as the standard Azure deployment pattern across 12 subscriptions."
-    - "Embedded DevSecOps scanning and blue/green + canary releases; built the FinOps practice behind a 30% reduction in Azure spend."
+    - "Embedded DevSecOps scanning and automation; FinOps leading to significant reduction in Azure spend."
 
 - org: Extrinsica Global
   role: Cloud Solution Engineer
